@@ -1,0 +1,163 @@
+" My Vim configuration!
+" It's heavily commented, since I don't trust my future self to remember
+" everything.
+" If it's not already obvious, use Vim's built-in help command to get more
+" info (and more ACCURATE info) on each of the options here
+
+"----- General Tips -----"
+" 1. Use Vim's built-in help command (:help <thing>) to get more info (and
+"    more ACCURATE info) on stuff done here.
+" 2. To check an option's current value: :set <option>? or echo &<option>.
+"    To check which file set an option (to its current value): :verbose set <option>?.
+"    This will report the file like so: 'Last set by...', unless there was no
+"    file that set this option, in which case nothing is said and the option
+"    takes on its default value.
+" 3. When defining keybindings, ALWAYS use the non-recursive mapping command,
+"    i.e. 'noremap', and if your keybinding is to only apply to a single mode or
+"    modes, use the corresponding mapping command, e.g. 'nnoremap' for Normal
+"    mode. Further, if the keybinding should be local to the buffer in which
+"    it's defined (for example, we have an autocmd that runs only for Python
+"    files, which defines some keybindings for that file), use <buffer> after
+"    the 'map' command, e.g. nnoremap <buffer> <C-J> j.
+
+" not sure exactly what this is for (and I think it's set by default) apparently it's necessary for some other cool stuff; see :h nocompatible for more details 
+" HAVE THIS AT THE TOP BECAUSE IT RESETS A BUNCH OF OTHER OPTIONS
+set nocompatible            
+" setting the location of the viminfo file (storing such things as search history; see :h viminfo) to the same directory as where the vimrc file is stored (this is tracked by the Vim environment variable $MYVIMRC; see :h $MYVIMRC)
+let _ = split($MYVIMRC, '/')
+let _[-1] = "viminfo"
+let _ = join(_, '/')
+if $MYVIMRC[0] == '/'       " a '/' at the start of $MYVIMRC gets dropped during the splitting
+    let _ = '/' . _         " reminder: '.' is VimScript's string concatenation operator
+endif
+execute "set viminfo+=n" . _
+
+"----- Leader and Localleader Definitions -----"
+let mapleader = "["
+
+" Might change this to something else in future, e.g. "[["?
+let maplocalleader = "]" 
+
+"----- Console UI & Text Display -----"
+
+set termguicolors           " enable 24-bit colors (need Terminal to be in 24-bit color too)
+                            " keep this at the top of .vimrc because setting it RESETS a bunch of other settings to their default values
+set number                  " show line numbers
+set cmdheight=1             " explicitly set the height of the command line (1 is default value anyway)
+set showcmd                 " show (partial) command (being typed) at command line
+set scrolloff=5             " keep at least 5 lines around the cursor, if possible
+
+" below settings relate to the display of long lines
+set wrap                    " when displaying long lines, soft wrap them (rather than the line trailing off into the abyss...)
+if has('linebreak')         " don't just start wrapping at the last character: do it more intelligently, starting at a word
+    set linebreak           " but only if this feature exists!
+endif
+
+syntax on                   " highlight syntax
+
+" below settings relate to the status and command lines at the bottom of the editor (command line is bottom-most, status line is above that)
+set laststatus=2            " necessary for the lightline status bar (see plugins, below) to be displayed all the time (by default, the status line is only displayed under certain circumstances, e.g. when there are multiple buffers open it'll show up)
+set noshowmode              " the command line no longer shows the Vim mode (want this because lightline's status bar does) 
+set shortmess+=F            " stops the file name from being displayed in the command line bar (want this because lightline's status bar displays this)
+set cursorline              " highlight the line the cursor is on (how the highlighting happens depends on the colourscheme)
+set wildmenu                " turns on command-line completion when typing Ex commands; just type : followed by some stuff (e.g. 'se') and cycle forward through the possible commands with <Tab> or <Ctrl-H> (or backward with <Ctrl-P>); when you've found the desired match, just continue typing
+
+"----- Text Editing and Searching Behaviour -----"
+
+set hlsearch                " highlight all search results when a pattern has been searched for
+                            " once you're done with the search, you might want to remove the highlighting; can do this with the Ex command :noh; the searched pattern is still stored, however, so n or N still work and will reactivate the highlighting
+                            " might prefer to define a key binding that will either invoke :noh or will clear the search buffer (Google how do to this)
+set ignorecase              " ignore case in search
+set smartcase               " unless there's a capital letter in front
+set backspace=2             " makes backspace work as expected in Insert mode (like most other text editors)
+set autoindent              " enables automatic indenting: if the current line begins with whitespace and we move on to a new line with <Enter>, the new line has the same whitespace
+                            " very useful when programming but also with normal text; can turn off in a Vim session with :set noautoindent
+
+"----- Indents and Tabs -----"
+
+set shiftwidth=4            " number of spaces to use for each individual indent; applies to autoindentation and the > and < keys
+set softtabstop=-1          " number of spaces that a tab counts for when performing editing operations, e.g. inserting a <Tab>; negative value means the value of 'shiftwidth' is used
+set expandtab               " <Tab>s in Insert mode are replaced by actual spaces that achieve the same spacing effect
+set shiftround              " round indents created/deleted by < and > keys in Normal mode so that the indentation of a line is always a multiple of the 'shiftwidth' setting
+set softtabstop=4           " indentations become 4 spaces
+                                                                  
+"----- vim-plug: Listing plug-ins to use -----"
+" vim-plug is very lightweight: it's a single file ~/.vim/autload/plug.vim, so it's automatically loaded (as one of the first start-up files) when Vim is fired up
+" To install plugins: :PlugInstall
+" To clean plugins (e.g. remove plugins not listed here): :CleanPlug
+
+call plug#begin('~/.vim/plugged')           " plugins are downloaded into this directory
+
+Plug 'preservim/nerdtree'                   " file system explorer
+Plug 'sonph/onehalf', { 'rtp': 'vim' }      " Makes available the 'onehalfdark', 'onehalflight' colorschemes, also available for the lightline status bar and the terminal (iTerm or MacOS Terminal)
+                                            " on that note, the iTerm colorscheme is great
+Plug 'itchyny/lightline.vim'                " a configurable statusline for Vim
+                                            " I haven't done much configuration, but it looks great out-of-the-box
+
+" This function (defined in plug.vim) modifies Vim's runtimepath (see :h runtimepath) to include the directories where the plug-ins, listed above, are installed; for example, if we have Plug 'A/B' above, then the path <plug-in-directory>/A/B is added, where <plug-in-directory> is the directory set within the plug#begin() function. However, it leaves the packpath variable (see :h packpath) alone.
+call plug#end()
+
+"----- Settings related to the plug-ins, above -----"
+" These need to be placed after the plug#begin()...plug#end() above
+
+colorscheme onehalfdark
+let g:lightline = { 'colorscheme': 'onehalfdark' }      " lightline status bar color scheme
+
+" ---- Filetype-specific settings ----"
+" Make sure these are in autocommand groups (augroup) where the first line is autocmd!
+" This ensures that consecutive sourcing of this file does not define the same autocommands multiple times
+" Also, make sure to use 'setlocal' where possible, in place of 'set', when
+" setting options that should only apply to those filetypes
+
+augroup vim_filetype
+    autocmd!
+    " Telling vim to not auto-wrap comments as I type them, when working with Vim files
+    " (because this file contains many long comments...)
+    autocmd FileType vim setlocal fo-=c
+augroup END
+
+"----- Key Bindings -----"
+" I place these at the end so they take precedence over any keybindings that might have been defined by the plug-ins above 
+
+" making j, k move up one DISPLAY LINE, rather than true line
+nnoremap j gj
+nnoremap k gk
+
+" for easier switching between multiple open windows: just hold Ctrl and use the usual movement keys h,j,k,l
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" making capital versions of movement keys h, j, k, l more powerful in Normal,
+" Visual, and Operator-Pending modes:
+" H moves to start of line, J down half a page, K up half a page, L to end of
+" line, with the exception that I don't map J and K in Operator-Pending mode
+" since 'half a page' isn't a very precise thing so I don't want to be
+" applying operations on such a motion
+nnoremap H ^
+vnoremap H ^
+onoremap H ^
+nnoremap L $
+vnoremap L $
+onoremap L $
+nnoremap J <C-D>
+vnoremap J <C-D>
+nnoremap K <C-U>
+vnoremap K <C-U>
+" by default, in both of these modes:
+" 1. H and L move to the top and bottom of the screen, respectively
+" 2. J joins lines and K performs a search for the word the cursor is on (or the text highlighted) using some program (by default, man)
+" I don't find these default commands useful APART FROM J, which I do find
+" useful, so I map <leader>j to J in these modes
+" Note: My leader is [ (at least, at the time of writing) and [j does not do
+" anything by default
+nnoremap <leader>j J
+vnoremap <leader>j J
+
+" escape to Normal mode easier from Insert
+inoremap jk <Esc>
+" I originally set this to make me stop pressing <Esc> in Insert mode, but I've realised it renders the arrow keys useless (because pressing them sends to Vim the character stream <Esc>OA, <Esc>OB, etc).
+"inoremap <Esc> <nop>
+
+" I've remapped J, above, but I find the default action of J (joining the current line to the next) quite useful in general; so, here I re-define it to 

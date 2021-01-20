@@ -1,0 +1,36 @@
+This repo contains stuff related to my .zsh configuration.
+
+To set it up from scratch:
+1. Place this repo/directory at ~/.zsh (to be clear, not WITHIN ~/.zsh, but AS
+~/.zsh).
+2. Place a .zshenv file in your home directory containing the line
+'export ZDOTDIR=path/to/this/repo'. This ensures zsh knows where to find the files
+stored in this repo; by default, ZDOTDIR is not set, and zsh defaults to
+looking in the home directory, where it'll find and load .zshenv.
+An example .zshenv is in this repo, which also explains in more detail
+why we need this step.
+3. Follow the installation instructions for zplug and install it at
+~/.zplug (which should happen by default).
+4. Start a new shell process (or source .zshrc from the current one) and run
+'zplug install'. Again, start a new shell process (or source...) and the
+plug-ins should be activated.
+
+NOTE: Things might not look pretty if the terminal running the shell
+is not true-color or if the font isn't a Nerd font, because some of my
+plug-ins (particularly the powerline10k command prompt plug-in) rely
+on these.
+
+Further information on my set-up:
+- iTerm2 is my terminal emulator.
+- I use the onehalfdark colour scheme (search 'onehalf colour scheme') for iTerm2.
+- Within iTerm2, I use the font MesloLGS NF recommended by the
+  powerlevel10k (a zsh plug-in for the command prompt) docs, where
+  you'll also find installation instructions.
+- I use zplug for zsh plug-in management, because it's simple,
+  efficient, and
+  transparent. I've tried oh-my-zsh and find it to be rather bloated.
+- I use powerlevel10k to customise the command prompt.
+  The file storing my configuration is .p10k.zsh.
+- I use the zsh-syntax-highlighting plug-in, installed via oh-my-zsh,
+  for, well, syntax highlighting.
+- For more, see the .zshrc file.
