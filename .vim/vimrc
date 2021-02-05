@@ -91,7 +91,7 @@ call plug#begin('~/.vim/plugged')           " plugins are downloaded into this d
 Plug 'preservim/nerdtree'                   " file system explorer
 Plug 'sonph/onehalf', { 'rtp': 'vim' }      " Makes available the 'onehalfdark', 'onehalflight' colorschemes, also available for the lightline status bar and the terminal (iTerm or MacOS Terminal)
                                             " on that note, the iTerm colorscheme is great
-Plug 'itchyny/lightline.vim'                " a configurable statusline for Vim
+Plug 'itchyny/lightline.vim'                " A configurable statusline for Vim
                                             " I haven't done much configuration, but it looks great out-of-the-box
 
 " This function (defined in plug.vim) modifies Vim's runtimepath (see :h runtimepath) to include the directories where the plug-ins, listed above, are installed; for example, if we have Plug 'A/B' above, then the path <plug-in-directory>/A/B is added, where <plug-in-directory> is the directory set within the plug#begin() function. However, it leaves the packpath variable (see :h packpath) alone.

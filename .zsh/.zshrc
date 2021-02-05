@@ -1,4 +1,3 @@
-
 # brew-installed command-line tools
 # ---------------------------------
 
@@ -73,6 +72,12 @@ export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"  # gets us find, xar
 # -h ensures sizes of files are in human-readable form
 # --color ensures output is colored. See man ls for details.
 alias ls='ls -Fh --color'
+
+# The output of ls depends on the LS_COLORS environment variable.
+# The GNU utility `dircolor` is a convenience utility for setting this variable.
+# I've got some file describing the color settings I want; passing it to dircolors
+# so that dircolors interprets it and sets the LS_COLORS variable.
+eval "$(dircolors $HOME/.dircolors/dircolors.ansi-dark)"
 
 # This is here thanks to the powerlevel10k plug-in
 # ------------------------------------------------
@@ -209,3 +214,7 @@ bindkey -M viins '^?' backward-delete-char
 # "Reading from stdin..." printed at the command-line - very annoying.
 # Here's a fix obtained from https://vi.stackexchange.com/questions/4682/how-can-i-suppress-the-reading-from-stdin-message-from-within-vim:
  export MANPAGER='bash -c "vim -MRn -c \"set ft=man nomod nolist nospell nonu\" -c \"nm q :qa!<CR>\" -c \"nm <end> G\" -c \"nm <home> gg\"</dev/tty <(col -b)"'
+
+# Added by fzf installation: https://github.com/junegunn/fzf#fuzzy-completion-for-bash-and-zsh
+# Make sure to have installed fzf at ~/.fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
