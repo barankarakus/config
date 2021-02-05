@@ -7,6 +7,34 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 # -F ensures directories are suffixed with /, executables with *, symlinks *
 alias ls='ls -GFh'
 
+# brew-installed ruby
+# -------------------
+# Have installed ruby via brew, which leads to the following message:
+
+# # By default, binaries installed by gem will be placed into:
+  # # /usr/local/lib/ruby/gems/3.0.0/bin
+# # 
+# # You may want to add this to your PATH.
+# # 
+# # ruby is keg-only, which means it was not symlinked into /usr/local,
+# # because macOS already provides this software and installing another version in
+# # parallel can cause all kinds of trouble.
+# # 
+# # If you need to have ruby first in your PATH run:
+  # # echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.zshrc
+# # 
+# # For compilers to find ruby you may need to set:
+  # # export LDFLAGS="-L/usr/local/opt/ruby/lib"
+  # # export CPPFLAGS="-I/usr/local/opt/ruby/include"
+
+# I want to use brew-installed ruby and gem rather than the default
+# Mac installation ruby and gem (the latter leads to obscure errors
+# for me... I think it's just there for use by the system, just like
+# the system Python interpreter)
+# So we follow the instructions given by brew's output:
+export PATH="/usr/local/opt/ruby/bin:$PATH"  # Placing brew's 'ruby' and 'gem' in PATH
+export PATH="/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"  # This folder is where brew gem-installed binaries are placed
+
 # This is here thanks to the powerlevel10k plug-in
 # ------------------------------------------------
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zsh/.zshrc.
