@@ -102,6 +102,11 @@ zle -N zsh-widget-noop
 # Using 'jk' typed in quick succession to Esc to Normal mode from Insert
 bindkey -M viins 'jk' vi-cmd-mode
 
+# Mapping <Ctrl-K> and <Ctrl-J> to do nothing in Normal mode,
+# because I find myself accidentally pressing them (I'm confusing
+# them for <Cmd-K>, <Cmd-J>, which I've set up to move up and down
+# within iTerm panes)
+
 # Mapping H, L to what they're mapped to in my .vimrc,
 # i.e H takes us to first non-blank character in line (alias for ^),
 # L to end of line (alias for $)
@@ -154,9 +159,14 @@ bindkey -M viins '^?' backward-delete-char
 
 # Setting up zsh to invoke Vim's built-in manpager for viewing man pages
 # ----------------------------------------------------------------------
-export MANPAGER="vim -M +MANPAGER -"
 # Two benefits:
 # 1) man pages are syntax highlighted - as if they needed to be more fun to
 # read :)
 # 2) man pages are opened up in Vim - so all my keybindings apply
-# More details: see :help manpager and :help man within Vim
+
+# Originally, I had the following line, obtained from :help man and :help manpager within Vim:
+# export MANPAGER="vim -M +MANPAGER -"
+# This works fine but has one problem: Once you open a man page and then quit, you see
+# "Reading from stdin..." printed at the command-line - very annoying.
+# Here's a fix obtained from https://vi.stackexchange.com/questions/4682/how-can-i-suppress-the-reading-from-stdin-message-from-within-vim:
+ export MANPAGER='bash -c "vim -MRn -c \"set ft=man nomod nolist nospell nonu\" -c \"nm q :qa!<CR>\" -c \"nm <end> G\" -c \"nm <home> gg\"</dev/tty <(col -b)"'

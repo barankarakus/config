@@ -1,0 +1,7 @@
+Stuff to add to .vimrc when I figure out how to:
+
+1) How to make <Enter> in normal mode break current line at current position (cursor onwards) if at the end of the current line, else create new line (in both cases, moving to the start of the new line). This makes <Enter> behave as one might expect in other text editors.
+2) How to make <C-U> in Insert mode change current word's case, but keep us in Insert mode and leave the cursor where it is. May also want to make it so that instead of current word, we work on a WORD, since then we can use this to make global constants like MAX_CONNECTIONS_ALLOWED uppercase.
+3) Figure out a Vim Markdown note-taking set-up.
+tpope/vim-markdown
+
