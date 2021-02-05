@@ -4,7 +4,7 @@
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 # Alias ls so that -F and -h flags are always passed (see man ls for details)
-# -F ensures directories are suffixed with /, executables with *, symlinks *
+# -F ensures directories are suffixed with /, executables with *, symlinks @
 alias ls='ls -GFh'
 
 # brew-installed ruby
@@ -86,23 +86,6 @@ zplug load
 # configuration file specifying how the prompt should look; more details above.
 [[ ! -f "$ZDOTDIR/.p10k.zsh" ]] || source "$ZDOTDIR/.p10k.zsh"
 # -------------------------------------
-
-# ----------------------
-# Anaconda installation put this in my .bash_profile, probably because at
-# the time of installation Bash was my default shell.
-# I've placed it here so Anaconda works correctly when using zsh.
-__conda_setup="$('/Users/barankarakus/opt/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
-    else
-            if [ -f "/Users/barankarakus/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-                        . "/Users/barankarakus/opt/anaconda3/etc/profile.d/conda.sh"
-                            else
-                                        export PATH="/Users/barankarakus/opt/anaconda3/bin:$PATH"
-                                            fi
-fi
-unset __conda_setup
-# ----------------------
 
 # Setting up zsh Vim emulation.
 # -----------------------------
