@@ -105,6 +105,11 @@ alias ezrc="$EDITOR $ZDOTDIR/.zshrc"  # edit zshrc
 alias elzrc="$EDITOR $ZDOTDIR/localzshrc"  # edit local zshrc
 alias szrc="source $ZDOTDIR/.zshrc"  # source zshrc
 
+alias g="git"
+alias gs="git status"
+alias gss="git status -s"
+alias gcmt="git commit"
+
 # Source local zshrc file
 # ---------------------------------------------------------------------------
 U_source_if_exists $ZDOTDIR/localzshrc
