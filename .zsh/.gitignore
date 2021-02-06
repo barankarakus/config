@@ -1,3 +1,4 @@
 .zsh_history
-.zcompdump*  # 'cache' files used to speed up shell completion
+# 'cache' files used to speed up shell completion
+.zcompdump*  
 localzshrc
