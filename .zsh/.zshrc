@@ -2,15 +2,15 @@
 # ---------------------------------------------------------------------------
 source $ZDOTDIR/utils
 
-# Using uname to distinguish between MacOS and Linux systems and load appropriate
+# Using `uname` to distinguish between MacOS and Linux systems and load appropriate
 # OS-specific configuration files
 # ---------------------------------------------------------------------------
 failure_msg="Could not detect operating system: Can't configure zsh properly\n"
-if ! command uname &> /dev/null ; then
+if ! U_command_exists uname; then
     # Can't find `uname` utility
     printf $failure_msg
 else
-    system=$(uname)
+    system=$(uname -s)
     if [ $system = "Darwin" ]; then
         U_source_if_exists $ZDOTDIR/maczshrc
     elif [ $system = "Linux" ]; then
