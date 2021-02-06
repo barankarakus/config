@@ -94,6 +94,16 @@ U_source_if_exists $ZDOTDIR/zshvim
 # ------------------------------------------
 U_source_if_exists ~/.fzf.zsh
 
+# Environment configuration
+# ------------------------------------------
+export EDITOR="vim"
+
+# Some aliases
+# ------------------------------------------
+alias ezrc="$EDITOR $ZDOTDIR/.zshrc"  # edit zshrc
+alias elzrc="$EDITOR $ZDOTDIR/localzshrc"  # edit local zshrc
+alias szrc="source $ZDOTDIR/.zshrc"  # source zshrc
+
 # Source local zshrc file
 # ------------------------------------------
 U_source_if_exists $ZDOTDIR/localzshrc
