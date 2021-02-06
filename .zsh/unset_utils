@@ -1,0 +1,3 @@
+unset -f source_if_exists
+
+unset -f add_to_PATH_if_exists

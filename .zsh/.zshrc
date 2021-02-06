@@ -1,4 +1,4 @@
-source $ZDOTDIR/utils.sh
+source $ZDOTDIR/utils
 
 # Using uname to distinguish between MacOS and Linux systems and load appropriate
 # OS-specific configuration files

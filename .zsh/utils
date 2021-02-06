@@ -1,3 +1,5 @@
+# Some utility functions for use when configuring zsh
+# The unset_utils file unsets the items defined here
 
 source_if_exists () {
     [ -f $1 ] && source $1
