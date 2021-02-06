@@ -1,16 +1,25 @@
+# Utility functions/items for use when configuring zsh
+# Run the $ZDOTDIR/unset_utils function at the end of this file to unset the util items
 source $ZDOTDIR/utils
 
 # Using uname to distinguish between MacOS and Linux systems and load appropriate
 # OS-specific configuration files
-system=$(uname)
-if [ $system = "Darwin" ]; then
-    source_if_exists $ZDOTDIR/maczshrc
-elif [ $system = "Linux" ]; then
-    source_if_exists $ZDOTDIR/linuxzshrc
+failure_msg="Could not detect operating system: Can't configure zsh properly\n"
+if ! command uname &> /dev/null ; then
+    # Can't find `uname` utility
+    printf $failure_msg
 else
-    printf "Could not detect operating system: Can't configure zsh properly\n"
-fi;
-unset system
+    system=$(uname)
+    if [ $system = "Darwin" ]; then
+        source_if_exists $ZDOTDIR/maczshrc
+    elif [ $system = "Linux" ]; then
+        source_if_exists $ZDOTDIR/linuxzshrc
+    else
+        printf $failure_msg
+    fi
+    unset system
+fi
+unset failure_msg
 
 # Modifying (GNU) ls
 # ------------------
@@ -88,3 +97,7 @@ source_if_exists ~/.fzf.zsh
 # Source local zshrc file
 # ------------------------------------------
 source_if_exists $ZDOTDIR/localzshrc
+
+# Unset util items
+# ------------------------------------------
+source $ZDOTDIR/unset_utils
