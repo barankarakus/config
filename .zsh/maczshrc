@@ -18,9 +18,9 @@
 # this, the brew installation output gives us a directory to append to our PATH to be able
 # to use the tools with their proper names. This is what the below exports are doing.
 
-add_to_PATH_if_exists "/usr/local/opt/coreutils/libexec/gnubin"  # ls, wc, uniq, mkdir etc
-add_to_PATH_if_exists "/usr/local/opt/grep/libexec/gnubin"  # grep, egrep, fgrep
-add_to_PATH_if_exists "/usr/local/opt/findutils/libexec/gnubin"  # find, xargs
+U_add_to_PATH_if_exists "/usr/local/opt/coreutils/libexec/gnubin"  # ls, wc, uniq, mkdir etc
+U_add_to_PATH_if_exists "/usr/local/opt/grep/libexec/gnubin"  # grep, egrep, fgrep
+U_add_to_PATH_if_exists "/usr/local/opt/findutils/libexec/gnubin"  # find, xargs
 
 # Note: We also, obviously, want `man ls` etc to show us the man page for the
 # GNU tools, *not* whatever variation of it MacOS provides. I didn't have to do
@@ -42,5 +42,5 @@ add_to_PATH_if_exists "/usr/local/opt/findutils/libexec/gnubin"  # find, xargs
 # version of ruby over the MacOS default version. Moreover, it tells us to append the
 # directory where gem will install its binaries to our PATH.
 
-add_to_PATH_if_exists "/usr/local/opt/ruby/bin"  # brew-installed ruby/gem live here
-add_to_PATH_if_exists "/usr/local/lib/ruby/gems/3.0.0/bin"  # gem-installed binaries live here
+U_add_to_PATH_if_exists "/usr/local/opt/ruby/bin"  # brew-installed ruby/gem live here
+U_add_to_PATH_if_exists "/usr/local/lib/ruby/gems/3.0.0/bin"  # gem-installed binaries live here

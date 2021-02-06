@@ -1,5 +1,5 @@
-# Utility functions/items for use when configuring zsh
-# Run the $ZDOTDIR/unset_utils function at the end of this file to unset the util items
+# Load utility functions/items for use when configuring zsh; these start with U_
+# Source the $ZDOTDIR/unset_utils script at the end of this file to unset the util items
 source $ZDOTDIR/utils
 
 # Using uname to distinguish between MacOS and Linux systems and load appropriate
@@ -11,9 +11,9 @@ if ! command uname &> /dev/null ; then
 else
     system=$(uname)
     if [ $system = "Darwin" ]; then
-        source_if_exists $ZDOTDIR/maczshrc
+        U_source_if_exists $ZDOTDIR/maczshrc
     elif [ $system = "Linux" ]; then
-        source_if_exists $ZDOTDIR/linuxzshrc
+        U_source_if_exists $ZDOTDIR/linuxzshrc
     else
         printf $failure_msg
     fi
@@ -83,20 +83,20 @@ zplug load
 # Load the powerlevel10k configuration file specifying how the prompt
 # should look: more details above.
 # -------------------------------------
-source_if_exists $ZDOTDIR/.p10k.zsh
+U_source_if_exists $ZDOTDIR/.p10k.zsh
 
 # Source zsh vim emulation configuration
 # Also makes vim the MANPAGER
 # --------------------------------------
-source_if_exists $ZDOTDIR/zshvim
+U_source_if_exists $ZDOTDIR/zshvim
 
 # Load fzf (command-line fuzzy-finder)
 # ------------------------------------------
-source_if_exists ~/.fzf.zsh
+U_source_if_exists ~/.fzf.zsh
 
 # Source local zshrc file
 # ------------------------------------------
-source_if_exists $ZDOTDIR/localzshrc
+U_source_if_exists $ZDOTDIR/localzshrc
 
 # Unset util items
 # ------------------------------------------
