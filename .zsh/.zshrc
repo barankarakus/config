@@ -86,10 +86,9 @@ zplug load
 # ---------------------------------------------------------------------------
 U_source_if_exists $ZDOTDIR/.p10k.zsh
 
-# Source zsh vim emulation configuration
-# Also makes vim the MANPAGER
+# Source zsh keybindings configuration file
 # ---------------------------------------------------------------------------
-U_source_if_exists $ZDOTDIR/zshvim
+source $ZDOTDIR/keybindings
 
 # Load fzf (command-line fuzzy-finder)
 # ---------------------------------------------------------------------------
