@@ -8,7 +8,47 @@ bindkey -v
 # Defining a new 'no-op' function/widget, doing nothing
 # I don't use this but keeping it here for illustrative purposes
 zsh-widget-noop () {}
-zle -N zsh-widget-noop
+zle -N zsh-widget-noop  # Allow the function to be a ZLE widget
+
+# By default, '^J' is mapped to the widget 'accept-line', which is exactly
+# the effect of pressing Enter (Carriage Return): the text in the output
+# buffer is sent to be interpreted by zsh, and our command prompt moves 
+# down a line. I can tell this from the output of `bindkey '^J'`.
+# Here's the thing. '^J' represents 'newline'. Below, we tell zsh that
+# when it receives '^J', it should instead invoke the widget 'self-insert',
+# so that the key '^J' (i.e. a new line) is inserted into the buffer.
+bindkey '^J' self-insert
+# Okay, cool, but for this to be usable we need our terminal emulator to be
+# able to send the key sequence '^J' to zsh.
+# By default, this is exactly what <Ctrl-J> will send.
+# Instead, I want <Shift-Enter> to send this (indeed, the whole point of what
+# I'm doing here is to enable me to take a new line with <Shift-Enter>).
+# Thus, we have to mess around with our terminal emulator's settings to force
+# it to send this key sequence upon <Shift-Enter>. I've figured out that in iTerm
+# the way to do this is to go to Profiles > Keys > + > And map <Shift-Return>
+# to the action 'Send Hex Codes', the hex code to send being 0xa. Alternatively,
+# select the action 'Send Text with "vim" Special Chars' and type in \<C-J>
+# as the text to send; this has the same effect but is more readable.
+
+# Note that zsh (and other shells) *do not* receive input direectly from your
+# keyboad. Your keyboard gives input to the *terminal*, which *then* converts
+# your key presses into key sequences, which it sends over to the shell.
+# Thus, the shell takes in not your key presses but the key sequences that your
+# terminal converted them into.
+# So, when we're binding '^J' to self-insert, above, we're telling zsh
+# what to do NOT when we type '^J' but rather when it receives the key
+# sequence '^J' (which our terminal transforms <Ctrl-J> into).
+# When trying to make keyboard actions do certain things in zsh, we need to
+# ask:
+# What key sequence does the terminal map that keyboard action to?
+# Once we know the answer to this, we know what key sequence to map
+# on the shell's end.
+# To figure this out, press <Ctrl-V> to activate 'quoted insert' (see
+# `bindkey '^V'` and the quoted-insert ZLE widget, then do the keyboard 
+# action. This 'quoted insert' mode of the shell makes it print the raw 
+# key sequences it receives, rather than interpreting them (i.e. it temporarily disables all
+# key sequence mappings). So, we can directly see the key sequence
+# printed.
 
 # Using 'jk' typed in quick succession to Esc to Normal mode from Insert
 bindkey -M viins 'jk' vi-cmd-mode
