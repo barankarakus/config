@@ -8,3 +8,7 @@ U_source_if_exists () {
 U_add_to_PATH_if_exists () {
     [ -d $1 ] && export PATH="$1:$PATH"
 }
+
+U_command_exists () {
+    command -v $1 &> /dev/null
+}

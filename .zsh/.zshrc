@@ -1,15 +1,16 @@
 # Load utility functions/items for use when configuring zsh; these start with U_
-# Source the $ZDOTDIR/unset_utils script at the end of this file to unset the util items
+# ---------------------------------------------------------------------------
 source $ZDOTDIR/utils
 
-# Using uname to distinguish between MacOS and Linux systems and load appropriate
+# Using `uname` to distinguish between MacOS and Linux systems and load appropriate
 # OS-specific configuration files
+# ---------------------------------------------------------------------------
 failure_msg="Could not detect operating system: Can't configure zsh properly\n"
-if ! command uname &> /dev/null ; then
+if ! U_command_exists uname; then
     # Can't find `uname` utility
     printf $failure_msg
 else
-    system=$(uname)
+    system=$(uname -s)
     if [ $system = "Darwin" ]; then
         U_source_if_exists $ZDOTDIR/maczshrc
     elif [ $system = "Linux" ]; then
@@ -22,7 +23,7 @@ fi
 unset failure_msg
 
 # Modifying (GNU) ls
-# ------------------
+# ---------------------------------------------------------------------------
 # Alias ls so that -F, -h, --color flags are always passed (see man ls for details)
 # -F ensures directories are suffixed with /, executables with *, symlinks @
 # -h ensures sizes of files are in human-readable form
@@ -36,7 +37,7 @@ alias ls='ls -Fh --color'
 eval "$(dircolors $HOME/.dircolors/dircolors.ansi-dark)"
 
 # This is here thanks to the powerlevel10k plug-in
-# ------------------------------------------------
+# ---------------------------------------------------------------------------
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -45,7 +46,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # zplug stuff (plug-in manager for zsh)
-# -------------------------------------
+# ---------------------------------------------------------------------------
 # Make sure that zplug is installed at this location
 ZPLUG_HOME="$HOME/.zplug"
 
@@ -78,36 +79,41 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 # Source plugins
 zplug load
-# -------------------------------------
+# ---------------------------------------------------------------------------
 
 # Load the powerlevel10k configuration file specifying how the prompt
 # should look: more details above.
-# -------------------------------------
+# ---------------------------------------------------------------------------
 U_source_if_exists $ZDOTDIR/.p10k.zsh
 
 # Source zsh vim emulation configuration
 # Also makes vim the MANPAGER
-# --------------------------------------
+# ---------------------------------------------------------------------------
 U_source_if_exists $ZDOTDIR/zshvim
 
 # Load fzf (command-line fuzzy-finder)
-# ------------------------------------------
+# ---------------------------------------------------------------------------
 U_source_if_exists ~/.fzf.zsh
 
 # Environment configuration
-# ------------------------------------------
+# ---------------------------------------------------------------------------
 export EDITOR="vim"
 
 # Some aliases
-# ------------------------------------------
+# ---------------------------------------------------------------------------
 alias ezrc="$EDITOR $ZDOTDIR/.zshrc"  # edit zshrc
 alias elzrc="$EDITOR $ZDOTDIR/localzshrc"  # edit local zshrc
 alias szrc="source $ZDOTDIR/.zshrc"  # source zshrc
 
+alias g="git"
+alias gs="git status"
+alias gss="git status -s"
+alias gcmt="git commit"
+
 # Source local zshrc file
-# ------------------------------------------
+# ---------------------------------------------------------------------------
 U_source_if_exists $ZDOTDIR/localzshrc
 
 # Unset util items
-# ------------------------------------------
+# ---------------------------------------------------------------------------
 source $ZDOTDIR/unset_utils
