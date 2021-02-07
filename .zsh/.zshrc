@@ -95,7 +95,22 @@ U_source_if_exists $ZDOTDIR/zshvim
 # ---------------------------------------------------------------------------
 U_source_if_exists ~/.fzf.zsh
 
-# Environment configuration
+# Setting up zsh to invoke Vim's built-in manpager for viewing man pages
+# Two benefits:
+# ---------------------------------------------------------------------------
+# 1) man pages are syntax highlighted - as if they needed to be more fun to
+# read :)
+# 2) man pages are opened up in Vim - so all my keybindings apply
+
+# Originally, I had the following line, obtained from :help man and :help manpager within Vim:
+# export MANPAGER="vim -M +MANPAGER -"
+# This works fine but has one problem: Once you open a man page and then quit, you see
+# "Reading from stdin..." printed at the command-line - very annoying.
+# Here's a fix obtained from
+# https://vi.stackexchange.com/questions/4682/how-can-i-suppress-the-reading-from-stdin-message-from-within-vim:
+export MANPAGER='bash -c "vim -MRn -c \"set ft=man nomod nolist nospell nonu\" -c \"nm q :qa!<CR>\" -c \"nm <end> G\" -c \"nm <home> gg\"</dev/tty <(col -b)"'
+
+# Some environment configuration
 # ---------------------------------------------------------------------------
 export EDITOR="vim"
 
