@@ -6,7 +6,7 @@
 * The maczshrc, linuxzshrc files contain system-specific global settings, i.e. settings I want across all MacOS systems or across all Linux systems that I'm working on.
 * .zshrc tries to detect which system (Mac or Linux) it's on and sources maczshrc or linuxzshrc as appropriate.
 
-* The zshvim file configures zsh's vim emulation mode. It also sets vim to be the MANPAGER, i.e. tells zsh I want to use vim to view man pages.
+* The keybindings file configures my zsh keybindings. In particular, it sets up zsh's vim emulation mode.
 * .zshrc sources this file.
 
 * The localzshrc file is for storing configuration options specific (local) to a particular machine.
@@ -15,7 +15,7 @@
 * This is where I store, for example, work-specific stuff on my work machine.
 
 * utils defines some items that are repeatedly used during zsh configuration.
-* Each of these items begins with 'U_' so it's clear they belong to utils.
+* Each of these items begins with "U_" so it's clear they belong to utils.
 * The first thing .zshrc does is source utils.
 * The last thing .zshrc does is source unset_utils, which unsets the items defined by utils.
 
