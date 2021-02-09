@@ -109,12 +109,41 @@ U_source_if_exists ~/.fzf.zsh
 # https://vi.stackexchange.com/questions/4682/how-can-i-suppress-the-reading-from-stdin-message-from-within-vim:
 export MANPAGER='bash -c "vim -MRn -c \"set ft=man nomod nolist nospell nonu\" -c \"nm q :qa!<CR>\" -c \"nm <end> G\" -c \"nm <home> gg\"</dev/tty <(col -b)"'
 
+# Recent directory management/navigation
+# ---------------------------------------------------------------------------
+# cd to a directory just by typing its name; no 'cd' needed
+# if what you type is a command name, it'll be treated as a command instead
+setopt autocd
+# zsh has a 'directory stack'; by default, 'cd' does not add to this stack
+# this option makes cd push to the directory stack
+setopt autopushd
+# don't push multiple copies of the same directory onto the stack
+setopt pushdignoredups
+# keep the directory stack from getting too large
+DIRSTACKSIZE=8
+# this caches the directory stack so it persists over multiple sessions
+# the chpwd function is necessary
+# I don't understand this code atm - need to understand it
+DIRSTACKFILE=$ZDOTDIR/.zdirs
+if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+  [[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD
+fi
+chpwd() {
+  print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+}
+# view directory history (stack) quickly
+# can then use cd -<number> to move to the desired directory
+# alternatively, write cd -, then press <Tab> to do this quicker
+alias dh="dirs -v"
+
 # Some environment configuration
 # ---------------------------------------------------------------------------
 export EDITOR="vim"
 
 # Some aliases
 # ---------------------------------------------------------------------------
+
 alias ezrc="$EDITOR $ZDOTDIR/.zshrc"  # edit zshrc
 alias elzrc="$EDITOR $ZDOTDIR/localzshrc"  # edit local zshrc
 alias szrc="source $ZDOTDIR/.zshrc"  # source zshrc
