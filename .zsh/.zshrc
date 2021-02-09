@@ -122,8 +122,7 @@ setopt pushdignoredups
 # keep the directory stack from getting too large
 DIRSTACKSIZE=8
 # this caches the directory stack so it persists over multiple sessions
-# the chpwd function is necessary
-# I don't understand this code atm - need to understand it
+# the chpwd function is a post-cd HOOK: it's called after every time we cd
 DIRSTACKFILE=$ZDOTDIR/.zdirs
 if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
   dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
