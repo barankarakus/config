@@ -142,6 +142,7 @@ export EDITOR="vim"
 
 # Some aliases
 # ---------------------------------------------------------------------------
+alias evrc="$EDITOR ~/.vim/vimrc"  # edit vimrc
 
 alias ezrc="$EDITOR $ZDOTDIR/.zshrc"  # edit zshrc
 alias elzrc="$EDITOR $ZDOTDIR/localzshrc"  # edit local zshrc
