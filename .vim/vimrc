@@ -93,6 +93,22 @@ Plug 'sonph/onehalf', { 'rtp': 'vim' }      " Makes available the 'onehalfdark',
                                             " on that note, the iTerm colorscheme is great
 Plug 'itchyny/lightline.vim'                " A configurable statusline for Vim
                                             " I haven't done much configuration, but it looks great out-of-the-box
+Plug 'neoclide/coc.nvim'                    " This allows vim to act as a Language Server Protocol (LSP) client,
+                                            " which then enables it to communicate with a Language Server (LS)
+                                            " via the LSP. The LS provides things like auto-completion, error detection,
+                                            " etc. For example, ccls is a LS for C++/C.
+                                            " But coc doesn't itself come with any Language Servers. An LS needs to be
+                                            " installed or provided separately.
+                                            " Roughly, coc works as follows: Say, we've hooked ccls up to coc, and then
+                                            " we open a C++ file. Then coc fires up ccls as a separate process, in the background.
+                                            " We have a standard client-server set-up: vim/coc acts as the client, and ccls
+                                            " as the server. vim/coc sends over our keystrokes, and ccls does all the hard
+                                            " work of figuring out any syntax errors, making suggestions for auto-completion,
+                                            " etc. The two-way communication is done in accordance with the LSP; in fact,
+                                            " this is the very point of the LSP: to standardise the communication between
+                                            " text editors and language servers.
+                                            " For more details on the LSP and Language Servers, this article is
+                                            " enlightening: https://chmanie.com/post/2020/07/17/modern-c-development-in-neovim/
 
 " This function (defined in plug.vim) modifies Vim's runtimepath (see :h runtimepath) to include the directories where the plug-ins, listed above, are installed; for example, if we have Plug 'A/B' above, then the path <plug-in-directory>/A/B is added, where <plug-in-directory> is the directory set within the plug#begin() function. However, it leaves the packpath variable (see :h packpath) alone.
 call plug#end()
@@ -102,6 +118,16 @@ call plug#end()
 
 colorscheme onehalfdark
 let g:lightline = { 'colorscheme': 'onehalfdark' }      " lightline status bar color scheme
+" Telling coc to ensure we've got this list of extensions installed; if not, then it'll install them
+" for us. 
+" The way to directly install coc extensions is to use CocIntall <extension>. But I prefer this since
+" I'm making it clear in my vim config exactly which extensions I'm installing.
+" coc extensions are (by defualt) stored at ~/.config/coc/extensions/. To see a full list of the extensions,
+" and where they live, use :CocList extensions.
+" To uninstall coc extensions: CocUninstall <extension>. But note that if the extension is still named
+" here, it'll be re-installed the next time coc starts up. So, remove it from this list, too.
+" More info: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+let g:coc_global_extensions = ['coc-pyright', 'coc-json']
 
 " ---- Filetype-specific settings ----"
 " Make sure these are in autocommand groups (augroup) where the first line is autocmd!
