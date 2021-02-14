@@ -153,6 +153,8 @@ alias gs="git status"
 alias gss="git status -s"
 alias gcmt="git commit"
 
+alias la="ls -a"  # list all
+
 # Source local zshrc file
 # ---------------------------------------------------------------------------
 U_source_if_exists $ZDOTDIR/localzshrc
