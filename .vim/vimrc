@@ -103,6 +103,9 @@ Plug 'itchyny/lightline.vim'                " A configurable statusline for Vim
 Plug 'sheerun/vim-polyglot'                 " One-stop shop collection of 'language packs' for vim
                                             " More precisely, syntax highlighting and indentation support for various
                                             " filetypes
+" Plug 'tpope/vim-surround'                   " One to add for the future
+                                            " Not addig right now because I've already added lots of new stuff lately;
+                                            " want to get acquainted with those first
 Plug 'tpope/vim-commentary'                 " For easily commenting/uncommenting lines of code
 Plug 'neoclide/coc.nvim'                    " This allows vim to act as a Language Server Protocol (LSP) client,
                                             " which then enables it to communicate with a Language Server (LS)
