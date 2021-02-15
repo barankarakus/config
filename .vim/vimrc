@@ -33,7 +33,7 @@ endif
 execute "set viminfo+=n" . _
 
 "----- Leader and Localleader Definitions -----"
-let mapleader = "["
+let mapleader = ','
 
 " Might change this to something else in future, e.g. "[["?
 let maplocalleader = "]" 
@@ -45,6 +45,7 @@ set termguicolors           " enable 24-bit colors (need Terminal to be in 24-bi
 set number                  " show line numbers
 set cmdheight=1             " explicitly set the height of the command line (1 is default value anyway)
 set showcmd                 " show (partial) command (being typed) at command line
+                            " REALLY useful: get to see what is typed so far
 set scrolloff=5             " keep at least 5 lines around the cursor, if possible
 
 " below settings relate to the display of long lines
@@ -80,6 +81,10 @@ set softtabstop=-1          " number of spaces that a tab counts for when perfor
 set expandtab               " <Tab>s in Insert mode are replaced by actual spaces that achieve the same spacing effect
 set shiftround              " round indents created/deleted by < and > keys in Normal mode so that the indentation of a line is always a multiple of the 'shiftwidth' setting
 set softtabstop=4           " indentations become 4 spaces
+
+"----- Miscellaneous settings -----"
+
+
                                                                   
 "----- vim-plug: Listing plug-ins to use -----"
 " vim-plug is very lightweight: it's a single file ~/.vim/autload/plug.vim, so it's automatically loaded (as one of the first start-up files) when Vim is fired up
@@ -116,8 +121,12 @@ call plug#end()
 "----- Settings related to the plug-ins, above -----"
 " These need to be placed after the plug#begin()...plug#end() above
 
+" colorscheme to use
+" note: the colorscheme for the lightline status bar needs to be set separately. See below.
 colorscheme onehalfdark
-let g:lightline = { 'colorscheme': 'onehalfdark' }      " lightline status bar color scheme
+
+" Settings related to coc
+" -----------------------
 " Telling coc to ensure we've got this list of extensions installed; if not, then it'll install them
 " for us. 
 " The way to directly install coc extensions is to use CocIntall <extension>. But I prefer this since
@@ -128,6 +137,36 @@ let g:lightline = { 'colorscheme': 'onehalfdark' }      " lightline status bar c
 " here, it'll be re-installed the next time coc starts up. So, remove it from this list, too.
 " More info: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 let g:coc_global_extensions = ['coc-pyright', 'coc-json']
+" Turning this on so I can do jump to definitions using the coc plug-in without being prompted to save the changes to the current file
+" coc documentation recommends this
+set hidden                  
+" Setting this to a lower value than the default of 4000 is recommended by the coc documentation because it 'leads to better user experience'.
+" from `:h updatetime`, it's clear that updatetime controls the time vim waits (for you to do nothing) before it writes to the .swp file ON DISK.
+" I'm guessing that, when working with a language server, it's the changes to the .swp file that are sent to the server; hence, updatetime
+" controls how responsive the language server will be to changes you make; however, I'm guessing that setting it to something stupidly low
+" might lead to some lag, since the swp file is constantly being written to.
+" Thoughts: Keep this at 300 (milliseconds) and change it if the experience isn't good enough
+set updatetime=300
+" If signcolumn='auto' (the default), then each time the LS spots an error the text is indented and '>>' is shown in red next to the number
+" of the line of the error; the text is indented so there's space for the '>>'; this indentation is really annoying because it comes and goes as errors
+" appear and are fixed. the solution is to set signcolumn='number' so that when '>>' does appear it just replaces the number of the line
+" instead of indenting everything in order to appear to the left of it.
+set signcolumn=number
+
+" Configuring the lightline status bar
+" ------------------------------------
+" Including coc status in it; this shows things like # of errors in the file, if any
+" See :h coc-status-lightline
+let g:lightline = {
+    \ 'colorscheme': 'onehalfdark',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+    \ },
+    \ 'component_function': {
+    \   'cocstatus': 'coc#status'
+    \ },
+    \ }
 
 " ---- Filetype-specific settings ----"
 " Make sure these are in autocommand groups (augroup) where the first line is autocmd!
@@ -187,3 +226,49 @@ inoremap jk <Esc>
 "inoremap <Esc> <nop>
 
 " I've remapped J, above, but I find the default action of J (joining the current line to the next) quite useful in general; so, here I re-define it to 
+
+" keybindings related to coc
+" --------------------------
+" coc doesn't set many (if any) keybindings - has to be done by the user
+" Most of the stuff here is adapted from the example configuration provided
+" in the coc docs
+
+" Use <Ctrl-Space> to trigger completion when in insert mode.
+" Note: Terminal emulators tend to, by default, send the ASCII NUL character when the user enters <Ctrl-Space>; this
+" is the same character sent by <Ctrl-@>. To cover both cases, I'm setting keybindings for both.
+inoremap <silent><expr> <C-space> coc#refresh()
+inoremap <silent><expr> <C-@> coc#refresh()
+
+" For jumping forward and backward between 'diagnostics', i.e. lines with errors
+" "down (j) to next error"
+nmap <silent> <leader>j <Plug>(coc-diagnostic-next)  
+" "up (k) to previous error"
+nmap <silent> <leader>k <Plug>(coc-diagnostic-prev)
+
+" For showing documentation for item which cursor is on in a preview window
+" This comes from the example vimrc file in the coc documentation
+nnoremap <silent> <leader>sd :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor
+" This doesn't work for me...? 
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Go-to keybindings
+" "go-to definition""
+nmap <silent> gd <Plug>(coc-definition)
+" "go-to implementation"
+" not useful for Python (doesn't make any sense), but for C++ it takes us
+" to an implementation rather than declaration, if they're in distinct locations
+nmap <silent> gi <Plug>(coc-implementation)
+" "go-to references"
+nmap <silent> gr <Plug>(coc-references)
