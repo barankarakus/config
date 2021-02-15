@@ -61,7 +61,9 @@ set laststatus=2            " necessary for the lightline status bar (see plugin
 set noshowmode              " the command line no longer shows the Vim mode (want this because lightline's status bar does) 
 set shortmess+=F            " stops the file name from being displayed in the command line bar (want this because lightline's status bar displays this)
 set cursorline              " highlight the line the cursor is on (how the highlighting happens depends on the colourscheme)
-set wildmenu                " turns on command-line completion when typing Ex commands; just type : followed by some stuff (e.g. 'se') and cycle forward through the possible commands with <Tab> or <Ctrl-H> (or backward with <Ctrl-P>); when you've found the desired match, just continue typing
+set wildmenu                " turns on command-line completion when typing Ex commands; just type : followed by some stuff (e.g. 'se') and cycle
+                            " forward through the possible commands with <Tab> or <Ctrl-H> (or backward with <Ctrl-P> or <Shift-Tab>); when you've
+                            " found the desired match, just continue typing
 
 "----- Text Editing and Searching Behaviour -----"
 
@@ -101,6 +103,10 @@ Plug 'itchyny/lightline.vim'                " A configurable statusline for Vim
 Plug 'sheerun/vim-polyglot'                 " One-stop shop collection of 'language packs' for vim
                                             " More precisely, syntax highlighting and indentation support for various
                                             " filetypes
+" Plug 'tpope/vim-surround'                   " One to add for the future
+                                            " Not addig right now because I've already added lots of new stuff lately;
+                                            " want to get acquainted with those first
+Plug 'tpope/vim-commentary'                 " For easily commenting/uncommenting lines of code
 Plug 'neoclide/coc.nvim'                    " This allows vim to act as a Language Server Protocol (LSP) client,
                                             " which then enables it to communicate with a Language Server (LS)
                                             " via the LSP. The LS provides things like auto-completion, error detection,
@@ -173,15 +179,27 @@ let g:lightline = {
 
 " ---- Filetype-specific settings ----"
 " Make sure these are in autocommand groups (augroup) where the first line is autocmd!
-" This ensures that consecutive sourcing of this file does not define the same autocommands multiple times
-" Also, make sure to use 'setlocal' where possible, in place of 'set', when
-" setting options that should only apply to those filetypes
+" Why? Placing an autocmd definition inside an augroup essentially just assigns that autocommand
+" a label: the name of the autocommand group. Whenever you run autocmd! within an augroup block,
+" any autocmds that come under that group are purged (i.e. removed).
+" Thus, writing autocmds in augroups and having autocmd! as the first line of an augroup ensures
+" that consecutive sourcing of the vimrc file does not define the same autocommands multiple times.
+" Also, make sure to use 'setlocal' where possible - in place of 'set' - when
+" setting options that should only apply to those filetypes.
 
 augroup vim_filetype
     autocmd!
     " Telling vim to not auto-wrap comments as I type them, when working with Vim files
     " (because this file contains many long comments...)
     autocmd FileType vim setlocal fo-=c
+augroup END
+
+augroup c_and_cpp_filetype
+    autocmd!
+    " The default commentstring is "/* %s */", where %s is the content of some line
+    " I'm changing this to "// %s"
+    autocmd FileType cpp setlocal commentstring=//\ %s
+    autocmd FileType c setlocal commentstring=//\ %s
 augroup END
 
 "----- Key Bindings -----"
