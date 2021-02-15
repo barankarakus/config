@@ -272,3 +272,23 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 " "go-to references"
 nmap <silent> gr <Plug>(coc-references)
+
+" Allow <Tab> and <Shift-Tab> to cycle downward and backward within an
+" auto-complete suggestions box; by default, <Ctrl-N> and <Ctl-P> do this
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" When seleting among auto-complete suggestions, let <CR> (<Enter>) select
+" the highlighted completion item (as opposed to literally entering <Enter>);
+" by default, the way to 'select' the highlighted item is to simply continue
+" typing normally, but I like confirming my selection with <Enter>
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
