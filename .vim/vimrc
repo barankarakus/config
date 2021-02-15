@@ -98,6 +98,9 @@ Plug 'sonph/onehalf', { 'rtp': 'vim' }      " Makes available the 'onehalfdark',
                                             " on that note, the iTerm colorscheme is great
 Plug 'itchyny/lightline.vim'                " A configurable statusline for Vim
                                             " I haven't done much configuration, but it looks great out-of-the-box
+Plug 'sheerun/vim-polyglot'                 " One-stop shop collection of 'language packs' for vim
+                                            " More precisely, syntax highlighting and indentation support for various
+                                            " filetypes
 Plug 'neoclide/coc.nvim'                    " This allows vim to act as a Language Server Protocol (LSP) client,
                                             " which then enables it to communicate with a Language Server (LS)
                                             " via the LSP. The LS provides things like auto-completion, error detection,
@@ -226,7 +229,7 @@ inoremap jk <Esc>
 "inoremap <Esc> <nop>
 
 " I've remapped J, above, but I find the default action of J (joining the current line to the next) quite useful in general; so, here I re-define it to 
-
+            
 " keybindings related to coc
 " --------------------------
 " coc doesn't set many (if any) keybindings - has to be done by the user
