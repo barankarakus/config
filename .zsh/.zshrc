@@ -120,21 +120,28 @@ setopt autopushd
 # don't push multiple copies of the same directory onto the stack
 setopt pushdignoredups
 # keep the directory stack from getting too large
-DIRSTACKSIZE=8
-# this caches the directory stack so it persists over multiple sessions
-# the chpwd function is a post-cd HOOK: it's called after every time we cd
-DIRSTACKFILE=$ZDOTDIR/.zdirs
-if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
-  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
-  [[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD
-fi
-chpwd() {
-  print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
-}
+DIRSTACKSIZE=10
+## this caches the directory stack so it persists over multiple sessions
+## the chpwd function is a post-cd HOOK: it's called immediately after every
+## time we cd; it's how we keep this directory stack cache file updated
+#DIRSTACKFILE=$ZDOTDIR/.zdirs
+#if [[ -f $DIRSTACKFILE ]] # && [[ $#dirstack -eq 0 ]]; 
+#then
+  #echo $dirstack
+  #dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+  #echo $dirstack
+  #echo $dirstack[1]
+  #[[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD
+  #echo $dirstack
+#fi
+#chpwd() {
+  #print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+  #dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+#}
 # view directory history (stack) quickly
 # can then use cd -<number> to move to the desired directory
 # alternatively, write cd -, then press <Tab> to do this quicker
-alias dh="dirs -v"
+alias dh="dirs -v"  # directory history
 
 # Some environment configuration
 # ---------------------------------------------------------------------------
