@@ -152,10 +152,10 @@ bindkey -M vicmd '^J' zsh-widget-noop
 bindkey -M vicmd 'H' vi-first-non-blank
 bindkey -M vicmd 'L' vi-end-of-line
 
-# Mapping <Ctrl-P> and <Ctrl-N> to what one expects: going up and down history.
-# By default, this works in Normal mode but not in Insert mode.
-bindkey '^P' up-history
-bindkey '^N' down-history
+# By default, <Ctrl-P> and <Ctrl-N> go up and down in the command history, but
+# only in Command/Normal mode. Here, I define it to work in Insert mode too.
+bindkey -M viins '^P' up-history
+bindkey -M viins '^N' down-history
 
 # Mapping : so that while in 'Command mode', it does nothing, because: 
 # 1) No such thing as Ex mode here, and
