@@ -173,4 +173,8 @@ bindkey -M vicmd ':' vi-cmd-mode
 bindkey -M viins '\b' backward-delete-char
 bindkey -M viins '^?' backward-delete-char
 
-
+# fzf (the command-line fuzzy finder) uses <Alt-c> to search for a directory to
+# cd to. iTerm on Mac sends the key sequence representing the character ç when
+# <Alt-c> is pressed, which doesn't seem to be what fzf is expecting. Here is a fix
+# courtesy of https://github.com/junegunn/fzf/issues/164:
+bindkey -M viins 'ç' fzf-cd-widget
