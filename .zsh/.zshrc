@@ -107,7 +107,13 @@ U_source_if_exists ~/.fzf.zsh
 # "Reading from stdin..." printed at the command-line - very annoying.
 # Here's a fix obtained from
 # https://vi.stackexchange.com/questions/4682/how-can-i-suppress-the-reading-from-stdin-message-from-within-vim:
-export MANPAGER='bash -c "vim -MRn -c \"set ft=man nomod nolist nospell nonu\" -c \"nm q :qa!<CR>\" -c \"nm <end> G\" -c \"nm <home> gg\"</dev/tty <(col -b)"'
+# export MANPAGER='bash -c "vim -MRn -c \"set ft=man nomod nolist nospell nonu\" -c \"nm q :qa!<CR>\" -c \"nm <end> G\" -c \"nm <home> gg\"</dev/tty <(col -b)"'
+# I used this for a while, but then it messed up when I installed the vim-polyglot plug-in.
+# Lesson: Don't use code snippets when you don't have a clue how they work :)
+# Here's an alternative:
+export MANPAGER="vim -M +MANPAGER --not-a-term -"
+# This doesn't show the "Reading from stdin..." but there's still a new line that's printed;
+# not worth fretting over.
 
 # Recent directory management/navigation
 # ---------------------------------------------------------------------------
