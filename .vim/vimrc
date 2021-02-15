@@ -20,17 +20,22 @@
 "    files, which defines some keybindings for that file), use <buffer> after
 "    the 'map' command, e.g. nnoremap <buffer> <C-J> j.
 
-" not sure exactly what this is for (and I think it's set by default) apparently it's necessary for some other cool stuff; see :h nocompatible for more details 
+" Telling vim to not pretend it's vi (thus enabling vim-specific features)
 " HAVE THIS AT THE TOP BECAUSE IT RESETS A BUNCH OF OTHER OPTIONS
 set nocompatible            
-" setting the location of the viminfo file (storing such things as search history; see :h viminfo) to the same directory as where the vimrc file is stored (this is tracked by the Vim environment variable $MYVIMRC; see :h $MYVIMRC)
-let _ = split($MYVIMRC, '/')
-let _[-1] = "viminfo"
-let _ = join(_, '/')
-if $MYVIMRC[0] == '/'       " a '/' at the start of $MYVIMRC gets dropped during the splitting
-    let _ = '/' . _         " reminder: '.' is VimScript's string concatenation operator
+" If this is vim (and not neovim), set the location of the viminfo file (see :h viminfo) to the same directory
+" as where the vimrc file is stored (this is tracked by the vim environment variable $MYVIMRC; see :h $MYVIMRC);
+" I do this so as to not pollute my home directory;
+" don't need to do this for neovim since neovim doesn't pollute home anyway
+if !has('nvim')
+    let _ = split($MYVIMRC, '/')
+    let _[-1] = "viminfo"
+    let _ = join(_, '/')
+    if $MYVIMRC[0] == '/'       " a '/' at the start of $MYVIMRC gets dropped during the splitting
+        let _ = '/' . _         " reminder: '.' is VimScript's string concatenation operator
+    endif
+    execute "set viminfo+=n" . _
 endif
-execute "set viminfo+=n" . _
 
 "----- Leader and Localleader Definitions -----"
 let mapleader = ','
