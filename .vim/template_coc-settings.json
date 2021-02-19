@@ -1,0 +1,42 @@
+// A template global (user) coc configuration file
+
+// A bit on coc configuration:
+// coc configuration is determined by the 'default', 'global'/'user', and 'workspace' configuration files,
+// in increasing order of precedence: for example, if an item is defined by both the 'global' and 'workspace'
+// config files, then the latter's value is used. Note that the 'default' config file doesn't actually exist:
+// we use it to refer to the default options that coc sets - see the coc docs for this.
+
+// How does coc find the 'global' configuration file? For vim, it expects it to be at ~/.vim/coc-settings.json.
+// For neovim, it's different. See the coc docs.
+// How does coc find 'workspace' configuration files? When a file is opened in (neo)vim, coc looks through
+// the parent directories of that file for a .vim/ dirctory, within which it looks for a coc-settings.json file.
+// This is the workspace config file.
+
+// To open and edit the global coc config (i.e. this file) from within (neo)vim: :CocConfig.
+// To open and edit the workspace coc config: :CocLocalConfig. If a local config can't be found, you'll be
+// prompted to create one in the directory of the file currently being edited.
+
+{
+    "languageserver": {
+        // Setting up ccls as the Language Server to launch when working with C/C++/Objective-C files
+        "ccls": {
+            // Shell command to run to launch the Language Server
+            "command": "ccls",
+            // Filetypes (as set in Vim) on which to launch ccls
+            "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
+            // This is used to select the root of the project
+            // I'm specifying that the first parent directory that contains a .ccls file should be selected as the project root
+            "rootPatterns": [".ccls"],
+            // Specifying that the language server (ccls) should only be started if the project root was identified, in accordance
+            // with rootPatterns. I'm essentially saying: don't launch ccls unless a project root could be found.
+            "requireRootPattern": true,
+            // JSON object passed to the language server (ccls) on initialization
+            "initializationOptions": {
+                "cache": {
+                    // Every project will have its own dedicated cache folder here
+                    "directory": "/tmp/ccls" 
+                }
+            }
+        }
+    }
+}
