@@ -1,6 +1,6 @@
 # Load utility functions/items for use when configuring zsh; these start with U_
 # ---------------------------------------------------------------------------
-source $ZDOTDIR/utils
+source $ZDOTDIR/utils.sh
 
 # Using `uname` to distinguish between MacOS and Linux systems and load appropriate
 # OS-specific configuration files
@@ -12,9 +12,9 @@ if ! U_command_exists uname; then
 else
     system=$(uname -s)
     if [ $system = "Darwin" ]; then
-        U_source_if_exists $ZDOTDIR/maczshrc
+        U_source_if_exists $ZDOTDIR/maczshrc.sh
     elif [ $system = "Linux" ]; then
-        U_source_if_exists $ZDOTDIR/linuxzshrc
+        U_source_if_exists $ZDOTDIR/linuxzshrc.sh
     else
         printf $failure_msg
     fi
@@ -88,7 +88,7 @@ U_source_if_exists $ZDOTDIR/.p10k.zsh
 
 # Source zsh keybindings configuration file
 # ---------------------------------------------------------------------------
-source $ZDOTDIR/keybindings
+source $ZDOTDIR/keybindings.sh
 
 # Load fzf (command-line fuzzy-finder)
 # ---------------------------------------------------------------------------
@@ -170,8 +170,8 @@ alias la="ls -a"  # list all
 
 # Source local zshrc file
 # ---------------------------------------------------------------------------
-U_source_if_exists $ZDOTDIR/localzshrc
+U_source_if_exists $ZDOTDIR/localzshrc.sh
 
 # Unset util items
 # ---------------------------------------------------------------------------
-source $ZDOTDIR/unset_utils
+source $ZDOTDIR/unset_utils.sh
