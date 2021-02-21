@@ -90,7 +90,6 @@ set shiftround              " round indents created/deleted by < and > keys in N
 set softtabstop=4           " indentations become 4 spaces
 
 "----- Miscellaneous settings -----"
-
                                                                 
 "----- vim-plug: Listing plug-ins to use -----"
 " vim-plug is very lightweight: it's a single file ~/.vim/autload/plug.vim, so it's automatically loaded (as one of the first start-up files) when Vim is fired up
@@ -248,14 +247,79 @@ inoremap jk <Esc>
 " I originally set this to make me stop pressing <Esc> in Insert mode, but I've realised it renders the arrow keys useless (because pressing them sends to Vim the character stream <Esc>OA, <Esc>OB, etc).
 "inoremap <Esc> <nop>
 
-" Tab Management/Navigation
-nnoremap <C-H> :tabprev<CR>
-nnoremap <C-L> :tabnext<CR>
-nnoremap <C-N> :tabnew<CR>
-nnoremap <C-Q> :tabclose<CR>
-inoremap <C-H> <Esc>:tabprev<CR>
-inoremap <C-L> <Esc>:tabprev<CR>
-inoremap <C-Q> <Esc>:tabclose<CR>
+" Tab Management/Navigation 
+" Kind of a hack to get <Ctrl-Alt-h> and <Ctrl-Alt-l> to move left/right in
+" tab-bar, and <Ctrl-Alt-j>, <Ctrl-Alt-k> to move the current tab left/right,
+" and make it all work in a terminal window
+" œ was originally <Alt-q>; map <Ctrl-Alt-h> to this on iTerm end
+nnoremap<silent> œ :tabprev<CR>
+inoremap<silent> œ :<Esc>:tabprev<CR>
+tnoremap<silent> œ <C-W>N:tabprev<CR>
+" Œ was originally <Alt-Shift-q>; map <Ctrl-Alt-l> to this on iTerm end
+nnoremap<silent> Œ :tabnext<CR>
+inoremap<silent> Œ <Esc>:tabnext<CR>
+tnoremap<silent> Œ <C-W>N:tabnext<CR>
+" vim's native tabmove function doesn't wrap around, so here's a workaround
+" @param direction -1 for left, 1 for right.
+function! TabMove(direction)
+    let s:current_tab=tabpagenr()
+    let s:total_tabs = tabpagenr("$")
+    " Wrap to end
+    if s:current_tab == 1 && a:direction == -1
+        tabmove
+    " Wrap to start
+    elseif s:current_tab == s:total_tabs && a:direction == 1
+        tabmove 0
+    " Normal move
+    else
+        execute (a:direction > 0 ? "+" : "-") . "tabmove"
+    endif
+endfunction
+" ® was originally <Alt-r>; map <Ctrl-Alt-Shift-h> to this on iTerm end
+nnoremap<silent> ® :call TabMove(-1)<CR>
+inoremap<silent> ® <C-o>:call TabMove(-1)<CR>
+tnoremap<silent> ® <C-W>N:call TabMove(-1)<CR>i
+" Â was originally <Alt-R>; map <Ctrl-Alt-Shift-l> to this on iTerm end
+nnoremap<silent> Â :call TabMove(1)<CR>
+inoremap<silent> Â <C-o>:call TabMove(1)<CR>
+tnoremap<silent> Â <C-W>N:call TabMove(1)<CR>i
+" New tab creation and current tab closing
+nnoremap<silent> <C-N> :tabnew<CR>
+inoremap<silent> <C-N> <Esc>:tabnew<CR>
+nnoremap<silent> <C-Q> :tabclose<CR>
+inoremap<silent> <C-Q> <Esc>:tabclose<CR>
+
+
+" Better tabbing
+vnoremap > >gv
+vnoremap > <gv
+
+" Quicker window navigation
+nnoremap <C-H> <C-W>h
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
+tnoremap <C-H> <C-W>h
+tnoremap <C-J> <C-W>j
+tnoremap <C-K> <C-W>k
+tnoremap <C-L> <C-W>l
+
+" Window resizing
+" Same 'hack' as above: co-ordinating vim and iTerm together to get the
+" desired effects
+" Mapping <Alt-=> to horizontal size increase
+nnoremap<silent> ≠ :vertical resize +2<CR>
+" Mapping <Alt--> to horizontal size decrease
+" æ was originally <Alt-'>; map <Alt--> to this on iTerm end
+nnoremap<silent> æ :vertical resize -2<CR>
+" Mapping <Alt-Shift-=> to vertical size increase
+nnoremap<silent> ± :resize +2<CR>
+" Mapping <Alt-Shift--> to vertical size decrease
+" Æ was originally <Alt-Shift-'>; map <Alt--> to this on iTerm end
+nnoremap<silent> Æ :resize -2<CR>
+
+" Allow mouse use?
+" set mouse=a
             
 " keybindings related to coc
 " --------------------------

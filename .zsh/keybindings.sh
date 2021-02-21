@@ -124,7 +124,7 @@ zle -N zsh-widget-noop  # Allow the function to be a ZLE widget
 # denoted as '\n'. Running `bindkey '\n'` we see that the zsh widget corresponding
 # to this character is also 'accept-line' (indeed, one can verify that pressing
 # <Ctrl-J> has the same effect as <Enter>).
-# Here's my solution:
+# Here's my first solution:
 # 1) Bind '^J' to the widget 'self-insert', so that the '^J'
 # (or '\n') character is literally inserted into the buffer when zsh receives it,
 # rather than invoking the 'accept-line' widget. 
@@ -133,8 +133,22 @@ zle -N zsh-widget-noop  # Allow the function to be a ZLE widget
 # and input \<C-J> as the text to be sent.
 # This does mean that *every* program running in iTerm now receives ^J instead of
 # ^M when I press <Shift-Enter>, but this isn't very consequential I don't think.
-bindkey -M viins '^J' self-insert
-bindkey -M vicmd '^J' self-insert
+# bindkey -M viins '^J' self-insert
+# Here's my second (preferred) solution:
+# First, why am I unhappy with the above? Precisely because it mangles  <Shift-Enter>
+# and <Ctrl-J>. I don't want this because when I have a terminal running inside
+# vim, I want to use <Shift-Enter> for entering newlines and <Ctrl-J> for whatever
+# I've mapped <Ctrl-J> in vim (at time of writing, I make <Ctrl-J> switch to the window
+# below).
+# In this second solution, I map some random character I'll never use to the key
+# sequence <Ctrl-V><Ctrl-J>, on the ZLE end. Then, on the iTerm end, I map <Shift-Enter>
+# to this character.
+# Why does this work? Because <Ctrl-V> launches the vi-quoted-insert widget, when in
+# viins mode. When this is launched, the next key received is interpreted literally.
+# So, when the ZLE sees <Ctrl-J> immediately after <Ctrl-V>, it doesn't ask itself
+# 'Hmm... what have I mapped <Ctrl-V> to?'; it simply inserts the newline character.
+# The 'random character' I've chosen is å, which is what <Alt-a> defaults to sending.
+bindkey -s -M viins 'å' '^V^J'
 
 # Using 'jk' typed in quick succession to Esc to Normal mode from Insert
 bindkey -M viins 'jk' vi-cmd-mode

@@ -2,6 +2,6 @@
 # 'cache' files used to speed up shell completion
 .zcompdump*  
 # local zshrc configuration
-localzshrc
+localzshrc.sh
 # directory stack cache
 .zdirs
