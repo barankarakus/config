@@ -93,6 +93,7 @@ source $ZDOTDIR/keybindings.sh
 # Load fzf (command-line fuzzy-finder)
 # ---------------------------------------------------------------------------
 U_source_if_exists ~/.fzf.zsh
+U_source_if_exists $ZDOTDIR/fzf_config.sh
 
 # Setting up zsh to invoke Vim's built-in manpager for viewing man pages
 # Two benefits:
