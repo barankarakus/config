@@ -215,13 +215,6 @@ augroup END
 nnoremap j gj
 nnoremap k gk
 
-" for easier switching between multiple open windows: just hold Ctrl and use the usual movement keys h,j,k,l
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-" making capital versions of movement keys h, j, k, l more powerful in Normal,
 " Visual, and Operator-Pending modes:
 " H moves to start of line, J down half a page, K up half a page, L to end of
 " line, with the exception that I don't map J and K in Operator-Pending mode
@@ -252,7 +245,10 @@ inoremap jk <Esc>
 " I originally set this to make me stop pressing <Esc> in Insert mode, but I've realised it renders the arrow keys useless (because pressing them sends to Vim the character stream <Esc>OA, <Esc>OB, etc).
 "inoremap <Esc> <nop>
 
-" I've remapped J, above, but I find the default action of J (joining the current line to the next) quite useful in general; so, here I re-define it to 
+" Tab Management/Navigation
+nnoremap <C-H> :tabprev<CR>
+nnoremap <C-L> :tabnext<CR>
+nnoremap <C-N> :tabnew<CR>
             
 " keybindings related to coc
 " --------------------------
@@ -267,10 +263,8 @@ inoremap <silent><expr> <C-space> coc#refresh()
 inoremap <silent><expr> <C-@> coc#refresh()
 
 " For jumping forward and backward between 'diagnostics', i.e. lines with errors
-" "down (j) to next error"
-nmap <silent> <leader>j <Plug>(coc-diagnostic-next)  
-" "up (k) to previous error"
-nmap <silent> <leader>k <Plug>(coc-diagnostic-prev)
+nmap <silent> [g <Plug>(coc-diagnostic-next)  
+nmap <silent> ]g <Plug>(coc-diagnostic-prev)
 
 " For showing documentation for item which cursor is on in a preview window
 " This comes from the example vimrc file in the coc documentation
@@ -291,27 +285,10 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Go-to keybindings
-" "go-to definition""
 nmap <silent> gd <Plug>(coc-definition)
-" "go-to implementation"
-" not useful for Python (doesn't make any sense), but for C++ it takes us
-" to an implementation rather than declaration, if they're in distinct locations
 nmap <silent> gi <Plug>(coc-implementation)
-" "go-to references"
 nmap <silent> gr <Plug>(coc-references)
-
-" Allow <Tab> and <Shift-Tab> to cycle downward and backward within an
-" auto-complete suggestions box; by default, <Ctrl-N> and <Ctl-P> do this
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+nmap <silent> gy <Plug>(coc-type-definition)
 
 " When seleting among auto-complete suggestions, let <CR> (<Enter>) select
 " the highlighted completion item (as opposed to literally entering <Enter>);
