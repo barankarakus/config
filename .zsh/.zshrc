@@ -160,6 +160,7 @@ alias g="git"
 alias gs="git status"
 alias gss="git status -s"
 alias gcmt="git commit"
+alias gadd="git add"
 
 alias la="ls -a"  # list all
 
