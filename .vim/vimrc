@@ -99,6 +99,7 @@ set softtabstop=4           " indentations become 4 spaces
 
 call plug#begin('~/.vim/plugged')           " plugins are downloaded into this directory
 
+Plug 'junegunn/fzf'
 Plug 'preservim/nerdtree'                   " file system explorer
 Plug 'sonph/onehalf', { 'rtp': 'vim' }      " Makes available the 'onehalfdark', 'onehalflight' colorschemes, also available for the lightline status bar and the terminal (iTerm or MacOS Terminal)
                                             " on that note, the iTerm colorscheme is great
@@ -109,7 +110,7 @@ Plug 'sheerun/vim-polyglot'                 " One-stop shop collection of 'langu
                                             " filetypes
 Plug 'tomasr/molokai'
 " Plug 'tpope/vim-surround'                   " One to add for the future
-                                            " Not addig right now because I've already added lots of new stuff lately;
+                                            " Not adding right now because I've already added lots of new stuff lately;
                                             " want to get acquainted with those first
 Plug 'tpope/vim-commentary'                 " For easily commenting/uncommenting lines of code
 Plug 'neoclide/coc.nvim'                    " This allows vim to act as a Language Server Protocol (LSP) client,

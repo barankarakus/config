@@ -30,12 +30,6 @@ unset failure_msg
 # --color ensures output is colored. See man ls for details.
 alias ls='ls -Fh --color'
 
-# The output of ls depends on the LS_COLORS environment variable.
-# The GNU utility `dircolor` is a convenience utility for setting this variable.
-# I've got some file describing the color settings I want; passing it to dircolors
-# so that dircolors interprets it and sets the LS_COLORS variable.
-eval "$(dircolors $HOME/.dircolors/dircolors.ansi-dark)"
-
 # This is here thanks to the powerlevel10k plug-in
 # ---------------------------------------------------------------------------
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zsh/.zshrc.
