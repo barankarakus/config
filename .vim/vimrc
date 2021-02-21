@@ -108,9 +108,9 @@ Plug 'itchyny/lightline.vim'
 Plug 'sheerun/vim-polyglot'
 " Epic colorscheme
 Plug 'tomasr/molokai'
-" Plug 'tpope/vim-surround'                   " One to add for the future
-                                            " Not adding right now because I've already added lots of new stuff lately;
-                                            " want to get acquainted with those first
+" Ones for the future
+" Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-surround'
 " For easily commenting/uncommenting across various filetypes
 Plug 'tpope/vim-commentary'
 Plug 'neoclide/coc.nvim'                    " This allows vim to act as a Language Server Protocol (LSP) client,
