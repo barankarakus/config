@@ -91,7 +91,7 @@ set softtabstop=4           " indentations become 4 spaces
 
 "----- Miscellaneous settings -----"
 
-                                                                  
+                                                                
 "----- vim-plug: Listing plug-ins to use -----"
 " vim-plug is very lightweight: it's a single file ~/.vim/autload/plug.vim, so it's automatically loaded (as one of the first start-up files) when Vim is fired up
 " To install plugins: :PlugInstall
