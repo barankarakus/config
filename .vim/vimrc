@@ -101,6 +101,7 @@ call plug#begin('~/.vim/plugged')           " plugins are downloaded into this d
 
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter'
 Plug 'preservim/nerdtree'
 Plug 'itchyny/lightline.vim'
 " One-stop shop for 'language packs', i.e. syntax highlighting and indentation support for various filetypes
@@ -134,6 +135,9 @@ call plug#end()
 
 "----- Settings related to the plug-ins, above -----"
 " These need to be placed after the plug#begin()...plug#end() above
+
+" vim-rooter settings
+let g:rooter_patterns = ['.git', '.ccls']
 
 " colorscheme to use
 " note: the colorscheme for the lightline status bar needs to be set separately. See below.
