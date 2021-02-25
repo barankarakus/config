@@ -5,3 +5,4 @@ coc-settings.json
 # we want to ignore the contents of the directory but maintain its existence; the /plugged/.gitignore file exists only to indicate that the directory is not empty
 /plugged/*
 !/plugged/.gitignore
+.nfs*

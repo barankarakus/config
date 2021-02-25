@@ -355,6 +355,9 @@ endfunction
 " This doesn't work for me...? 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+" Symbol renaming
+nmap <leader>rn <Plug>(coc-rename)
+
 " Go-to keybindings
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gi <Plug>(coc-implementation)
