@@ -8,7 +8,7 @@
 " 1. Use Vim's built-in help command (:help <thing>) to get more info (and
 "    more ACCURATE info) on stuff done here.
 " 2. To check an option's current value: :set <option>? or echo &<option>.
-"    To check which file set an option (to its current value): :verbose set <option>?.
+"   To check which file set an option (to its current value): :verbose set <option>?.
 "    This will report the file like so: 'Last set by...', unless there was no
 "    file that set this option, in which case nothing is said and the option
 "    takes on its default value.
@@ -17,7 +17,7 @@
 "    modes, use the corresponding mapping command, e.g. 'nnoremap' for Normal
 "    mode. Further, if the keybinding should be local to the buffer in which
 "    it's defined (for example, we have an autocmd that runs only for Python
-"    files, which defines some keybindings for that file), use <buffer> after
+"    files, which defines some keybindings for that file), use <buffer> af/er
 "    the 'map' command, e.g. nnoremap <buffer> <C-J> j.
 
 " Telling vim to not pretend it's vi (thus enabling vim-specific features)
@@ -103,6 +103,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
 Plug 'preservim/nerdtree'
 Plug 'itchyny/lightline.vim'
+Plug 'christoomey/vim-tmux-navigator'
 " One-stop shop for 'language packs', i.e. syntax highlighting and indentation support for various filetypes
 Plug 'sheerun/vim-polyglot'
 " Epic colorscheme
@@ -128,9 +129,20 @@ Plug 'neoclide/coc.nvim'                    " This allows vim to act as a Langua
                                             " text editors and language servers.
                                             " For more details on the LSP and Language Servers, this article is
                                             " enlightening: https://chmanie.com/post/2020/07/17/modern-c-development-in-neovim/
+Plug 'voldikss/vim-floaterm'
 
 " This function (defined in plug.vim) modifies Vim's runtimepath (see :h runtimepath) to include the directories where the plug-ins, listed above, are installed; for example, if we have Plug 'A/B' above, then the path <plug-in-directory>/A/B is added, where <plug-in-directory> is the directory set within the plug#begin() function. However, it leaves the packpath variable (see :h packpath) alone.
 call plug#end()
+
+" let g:floaterm_shell = '/usr/bin/bash'
+let g:floaterm_wintype = 'split'
+let g:floaterm_position = 'rightbelow'
+let g:floaterm_height = 0.3
+let g:floaterm_autoclose = 1
+let g:floaterm_title = 'floaterm($1|$2)'
+" † is sent by <Alt-T>
+nnoremap   <silent>   †   :FloatermToggle<CR>
+tnoremap   <silent>   † <C-\><C-n>:FloatermToggle<CR>
 
 "----- Settings related to the plug-ins, above -----"
 " These need to be placed after the plug#begin()...plug#end() above
@@ -292,32 +304,53 @@ inoremap<silent> <C-Q> <Esc>:tabclose<CR>
 
 " Better tabbing
 vnoremap > >gv
-vnoremap > <gv
+vnoremap < <gv
 
 " Quicker window navigation
-nnoremap <C-H> <C-W>h
-nnoremap <C-J> <C-W>j
-nnoremap <C-K> <C-W>k
-nnoremap <C-L> <C-W>l
-tnoremap <C-H> <C-W>h
-tnoremap <C-J> <C-W>j
-tnoremap <C-K> <C-W>k
-tnoremap <C-L> <C-W>l
+" tmux-navigator plug-in defines <C-H>, <C-J> etc to move across tmux/vim
+" panes/windows frictionlessly - I don't need to define these myself
+" By default, this doesn't work in terminal panes in vim, so I'm enabling that
+" here
+tnoremap <silent> <C-H> <C-W>:TmuxNavigateLeft<CR>
+tnoremap <silent> <C-J> <C-W>:TmuxNavigateDown<CR>
+tnoremap <silent> <C-K> <C-W>:TmuxNavigateUp<CR>
+tnoremap <silent> <C-L> <C-W>:TmuxNavigateRight<CR>
+tnoremap <silent> <C-\> <C-W>:TmuxNavigatePrevious<CR>
+
+function! FloatermResize(hchange, wchange)
+    let b:floaterm_height += a:hchange
+    if b:floaterm_height > 0.9
+        let b:floaterm_height = 0.9
+    elseif b:floaterm_height < 0.1
+        let b:floaterm_height = 0.1
+    endif
+    let b:floaterm_width += a:wchange
+    if b:floaterm_width > 0.9
+        let b:floaterm_width = 0.9
+    elseif b:floaterm_width < 0.1
+        let b:floaterm_width = 0.1
+    endif
+    FloatermUpdate --width=b:floaterm_width --height=b:floaterm_height
+endfunction
 
 " Window resizing
 " Same 'hack' as above: co-ordinating vim and iTerm together to get the
 " desired effects
 " Mapping <Alt-=> to horizontal size increase
 nnoremap<silent> ≠ :vertical resize +2<CR>
+tnoremap<silent> ≠  <C-W>:call FloatermResize(0.0, 0.05)<CR>
 " Mapping <Alt--> to horizontal size decrease
 " æ was originally <Alt-'>; map <Alt--> to this on iTerm end
 nnoremap<silent> æ :vertical resize -2<CR>
+tnoremap<silent> æ  <C-W>:call FloatermResize(0.0, -0.05)<CR>
 " Mapping <Alt-Shift-=> to vertical size increase
 " ± was originally <Alt-Shift-=>; map <Ctrl-Alt-=> to this on iTerm end
 nnoremap<silent> ± :resize +2<CR>
+tnoremap<silent> ± <C-W>:call FloatermResize(0.05, 0.0)<CR>
 " Mapping <Alt-Shift--> to vertical size decrease
 " Æ was originally <Alt-Shift-'>; map <Ctrl-Alt--> to this on iTerm end
 nnoremap<silent> Æ :resize -2<CR>
+tnoremap<silent> Æ  <C-W>:call FloatermResize(-0.05, 0.0)<CR>
 
 " Allow mouse use?
 " set mouse=a
@@ -371,3 +404,4 @@ nmap <silent> gy <Plug>(coc-type-definition)
 " typing normally, but I like confirming my selection with <Enter>
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
