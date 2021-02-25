@@ -6,3 +6,4 @@ coc-settings.json
 /plugged/*
 !/plugged/.gitignore
 .nfs*
+*.swp
