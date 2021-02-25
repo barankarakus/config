@@ -313,9 +313,10 @@ nnoremap<silent> ≠ :vertical resize +2<CR>
 " æ was originally <Alt-'>; map <Alt--> to this on iTerm end
 nnoremap<silent> æ :vertical resize -2<CR>
 " Mapping <Alt-Shift-=> to vertical size increase
+" ± was originally <Alt-Shift-=>; map <Ctrl-Alt-=> to this on iTerm end
 nnoremap<silent> ± :resize +2<CR>
 " Mapping <Alt-Shift--> to vertical size decrease
-" Æ was originally <Alt-Shift-'>; map <Alt--> to this on iTerm end
+" Æ was originally <Alt-Shift-'>; map <Ctrl-Alt--> to this on iTerm end
 nnoremap<silent> Æ :resize -2<CR>
 
 " Allow mouse use?
