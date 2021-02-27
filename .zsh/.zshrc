@@ -153,7 +153,7 @@ export EDITOR="vim"
 alias evrc="$EDITOR ~/.vim/vimrc"  # edit vimrc
 
 alias ezrc="$EDITOR $ZDOTDIR/.zshrc"  # edit zshrc
-alias elzrc="$EDITOR $ZDOTDIR/localzshrc"  # edit local zshrc
+alias elzrc="$EDITOR $ZDOTDIR/localzshrc.sh"  # edit local zshrc
 alias szrc="source $ZDOTDIR/.zshrc"  # source zshrc
 
 alias g="git"
