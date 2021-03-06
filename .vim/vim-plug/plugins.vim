@@ -17,8 +17,15 @@ Plug 'tomasr/molokai'
 Plug 'tpope/vim-commentary'
 Plug 'neoclide/coc.nvim'
 Plug 'voldikss/vim-floaterm'
-" Needs node and yarn to be installed
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && command -v yarn && yarn install'  }
+" Shows a live preview of a markdown document in the browser as it's being
+" edited from vim
+" Needs node and yarn to be installed; only load if both of these can be found
+if system('command -v node') != '' && system('command -v yarn') != ''
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+    let g:mkdp_loaded = 1
+else
+    let g:mkdp_loaded = 0
+endif
 
 " This function (defined in plug.vim) modifies Vim's runtimepath (see :h
 " runtimepath) to include the directories where the plug-ins, listed above, are
@@ -83,3 +90,19 @@ let g:lightline = {
     \   'cocstatus': 'coc#status'
     \ },
     \ }
+
+" ----- markdown-preview -----
+if g:mkdp_loaded
+    " Don't automatically open the preview window when a markdown file is
+    " entered
+    let g:mkdp_auto_start = 0
+    " Don't autoclose the preview window when switching away from a markdown
+    " buffer
+    let g:mkdp_auto_close = 0
+    " Continuously refresh the preview window as we edit; set to 1 to only
+    " refresh upon writing the buffer
+    let g:mkdp_refresh_slow = 0
+    " Only make the mkdp commands (like :MarkdownPreview) available for
+    " markdown files
+    let g:mkdp_command_for_global = 0
+endif
