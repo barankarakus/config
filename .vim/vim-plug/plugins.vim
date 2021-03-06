@@ -2,7 +2,11 @@ call plug#begin('~/.vim/plugged')           " Plugins are downloaded into this d
 
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-rooter'
+
+" Installing my own fork until my PR gets approved
+" Plug 'airblade/vim-rooter'
+Plug 'barankarakus/vim-rooter'
+
 Plug 'preservim/nerdtree'
 Plug 'itchyny/lightline.vim'
 Plug 'christoomey/vim-tmux-navigator'
@@ -21,7 +25,9 @@ Plug 'voldikss/vim-floaterm'
 " edited from vim
 " Needs node and yarn to be installed; only load if both of these can be found
 if system('command -v node') != '' && system('command -v yarn') != ''
-    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+    " Installing my own fork until my PR gets approved
+    " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+    Plug 'barankarakus/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
     let g:mkdp_loaded = 1
 else
     let g:mkdp_loaded = 0
