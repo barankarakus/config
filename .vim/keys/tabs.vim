@@ -1,4 +1,3 @@
-
 " Tab management/navigation
 " œ was originally <Alt-q>; map <Ctrl-Alt-h> to this on iTerm end
 nnoremap<silent> œ :tabprev<CR>

@@ -34,3 +34,5 @@ vnoremap K <C-U>
 " This is useful, so I remap it to <leader>j
 nnoremap <leader>j J
 vnoremap <leader>j J
+
+nnoremap <C-Q> :Quit<CR>
