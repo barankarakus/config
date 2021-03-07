@@ -26,14 +26,14 @@ nnoremap<silent> Æ :resize -2<CR>
 function! TerminalResize(hchange, wchange)
     if &filetype ==# 'floaterm'
         let b:floaterm_height += a:hchange
-        if b:floaterm_height > 0.9
-            let b:floaterm_height = 0.9
+        if b:floaterm_height > 0.95
+            let b:floaterm_height = 0.95
         elseif b:floaterm_height < 0.1
             let b:floaterm_height = 0.1
         endif
         let b:floaterm_width += a:wchange
-        if b:floaterm_width > 0.9
-            let b:floaterm_width = 0.9
+        if b:floaterm_width > 0.95
+            let b:floaterm_width = 0.95
         elseif b:floaterm_width < 0.1
             let b:floaterm_width = 0.1
         endif

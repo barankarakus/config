@@ -1,3 +1,2 @@
-" † is <Alt-T>
-nnoremap   <silent>   †   :FloatermToggle<CR>
-tnoremap   <silent>   † <C-\><C-n>:FloatermToggle<CR>
+nnoremap   <silent>   <leader>t   :FloatermToggle<CR>
+tnoremap   <silent>   <leader>t <C-\><C-n>:FloatermToggle<CR>
