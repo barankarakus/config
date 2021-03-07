@@ -21,6 +21,7 @@ Plug 'tomasr/molokai'
 Plug 'tpope/vim-commentary'
 Plug 'neoclide/coc.nvim'
 Plug 'voldikss/vim-floaterm'
+
 " Shows a live preview of a markdown document in the browser as it's being
 " edited from vim
 " Needs node and yarn to be installed; only load if both of these can be found
@@ -32,6 +33,9 @@ if system('command -v node') != '' && system('command -v yarn') != ''
 else
     let g:mkdp_loaded = 0
 endif
+
+Plug 'mengelbrecht/lightline-bufferline'
+" Plug 'ap/vim-buftabline'
 
 " This function (defined in plug.vim) modifies Vim's runtimepath (see :h
 " runtimepath) to include the directories where the plug-ins, listed above, are
