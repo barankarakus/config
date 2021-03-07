@@ -1,6 +1,7 @@
 source $HOME/.vim/general/settings.vim
 source $HOME/.vim/general/keys.vim
 source $HOME/.vim/vim-plug/plugins.vim
+source $HOME/.vim/plugin-settings/settings.vim
 source $HOME/.vim/keys/windows.vim
 source $HOME/.vim/keys/tabs.vim
 source $HOME/.vim/keys/coc.vim
