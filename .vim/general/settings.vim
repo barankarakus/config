@@ -60,5 +60,5 @@ set shiftround
 
 "----- Miscellaneous -----"
 
-set hidden      " For smoothly transitioning between buffers
+set hidden          " For smoothly transitioning between buffers
 set updatetime=300

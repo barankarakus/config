@@ -1,3 +1,6 @@
+let g:fzf_preview_window = ['up:50%', 'ctrl-/']
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+
 " Make `:Rg` better! Adapted from fzf.vim's README.
 function! RipgrepFzf(query, fullscreen, directory)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
