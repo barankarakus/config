@@ -8,12 +8,17 @@ Plug 'junegunn/fzf.vim'
 Plug 'barankarakus/vim-rooter'
 
 Plug 'preservim/nerdtree'
+
 Plug 'itchyny/lightline.vim'
+
 Plug 'christoomey/vim-tmux-navigator'
+
 " Indentation support & syntax highlighting for various filetypes
 Plug 'sheerun/vim-polyglot'
-" Colorscheme
+
+" Colorschemes
 Plug 'tomasr/molokai'
+
 " Ones for the future
 " Plug 'tpope/vim-fugitive'
 " Plug 'tpope/vim-surround'
@@ -35,7 +40,6 @@ else
 endif
 
 Plug 'mengelbrecht/lightline-bufferline'
-" Plug 'ap/vim-buftabline'
 
 " This function (defined in plug.vim) modifies Vim's runtimepath (see :h
 " runtimepath) to include the directories where the plug-ins, listed above, are

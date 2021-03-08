@@ -4,8 +4,8 @@ export FZF_DEFAULT_COMMAND="ag -g ''"
 if U_command_exists bat; then
     Rg () {
         rg $@ '' | fzf --prompt='Rg> ' --bind "change:reload:rg $@ {q} || true" --phony \
-                    --preview='invoke_bat.sh {}' \
-                    --preview-window='up:50%' --delimiter=':' --bind 'ctrl-/:toggle-preview'
+                    --preview="$ZDOTDIR/fzf/invoke_bat.sh {}" \
+                    --preview-window='up:50%:hidden' --bind 'ctrl-/:toggle-preview'
     }
 else
     Rg () {

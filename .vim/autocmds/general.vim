@@ -23,7 +23,7 @@ endfunction
 " *before* trying to implement the quit action, first get rid of any terminal
 " buffers.
 function! s:QuitFloatermsIfLastWindow()
-    if tabpagenr('$') == 1 && winnr('$') == 1 && !&modified
+    if tabpagenr('$') == 1 && winnr('$') == 1
         let l:bufnames = []
         " We *cannot* just iterate over the buffer NUMBERS and provide these
         " buffer numbers to `bwipeout!`, because deleting a buffer changes the
