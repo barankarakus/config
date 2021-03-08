@@ -2,6 +2,10 @@
 # ---------------------------------------------------------------------------
 source $ZDOTDIR/utils.sh
 
+# Path to ripgrep config file
+# ---------------------------------------------------------------------------
+export RIPGREP_CONFIG_PATH=~/.ripgreprc
+
 # Using `uname` to distinguish between MacOS and Linux systems and load appropriate
 # OS-specific configuration files
 # ---------------------------------------------------------------------------
@@ -87,7 +91,7 @@ source $ZDOTDIR/keybindings.sh
 # Load fzf (command-line fuzzy-finder)
 # ---------------------------------------------------------------------------
 U_source_if_exists ~/.fzf.zsh
-U_source_if_exists $ZDOTDIR/fzf_config.sh
+U_source_if_exists $ZDOTDIR/fzf/fzf_config.sh
 
 # Setting up zsh to invoke Vim's built-in manpager for viewing man pages
 # Two benefits:
@@ -126,7 +130,7 @@ DIRSTACKSIZE=10
 ## the chpwd function is a post-cd HOOK: it's called immediately after every
 ## time we cd; it's how we keep this directory stack cache file updated
 #DIRSTACKFILE=$ZDOTDIR/.zdirs
-#if [[ -f $DIRSTACKFILE ]] # && [[ $#dirstack -eq 0 ]]; 
+#if [[ -f $DIRSTACKFILE ]] # && [[ $#dirstack -eq 0 ]];
 #then
   #echo $dirstack
   #dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )

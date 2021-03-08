@@ -1,0 +1,15 @@
+# Ripgrep configuration
+# ---------------------------------------------------------------------------
+# These options/flags are pre-pended to whatever arguments are explicitly given
+# to ripgrep at the command line. Think of this as a way to supply a list of
+# default arguments.
+# Since later arguments take precedence over earlier ones, it's easy to overrule
+# these default arguments on-the-fly.
+# Note that the RIPGREP_CONFIG_PATH enviroment variable must point to this file
+# for ripgrep to be aware of it.
+
+--column
+--smart-case
+--line-number
+--no-heading
+--color=always
