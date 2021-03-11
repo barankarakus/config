@@ -7,7 +7,6 @@ tnoremap <silent> <C-H> <C-W>:TmuxNavigateLeft<CR>
 tnoremap <silent> <C-J> <C-W>:TmuxNavigateDown<CR>
 tnoremap <silent> <C-K> <C-W>:TmuxNavigateUp<CR>
 tnoremap <silent> <C-L> <C-W>:TmuxNavigateRight<CR>
-tnoremap <silent> <C-\> <C-W>:TmuxNavigatePrevious<CR>
 
 " Better window resizing
 " Mapping <Alt-=> to horizontal size increase
@@ -51,9 +50,11 @@ function! TerminalResize(hchange, wchange)
     endif
 endfunction
 
-tnoremap<silent> ≠  <C-W>:call TerminalResize(0.0, 0.05)<CR>
-tnoremap<silent> æ  <C-W>:call TerminalResize(0.0, -0.05)<CR>
-tnoremap<silent> ± <C-W>:call TerminalResize(0.05, 0.0)<CR>
-tnoremap<silent> Æ  <C-W>:call TerminalResize(-0.05, 0.0)<CR>
+" Use <C-\><C-N> for escaping to Terminal-Normal mode because it's vim/neovim
+" agnostic
+tnoremap    <silent> ≠  <C-\><C-N>  :call TerminalResize(0.0, 0.05)     <CR>
+tnoremap    <silent> æ  <C-\><C-N>  :call TerminalResize(0.0, -0.05)    <CR>
+tnoremap    <silent> ±  <C-\><C-N>  :call TerminalResize(0.05, 0.0)     <CR>
+tnoremap    <silent> Æ  <C-\><C-N>  :call TerminalResize(-0.05, 0.0)    <CR>
 
 

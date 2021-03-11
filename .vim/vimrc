@@ -14,4 +14,6 @@ source $HOME/.vim/keys/floaterm.vim
 source $HOME/.vim/autocmds/general.vim
 source $HOME/.vim/autocmds/ftspecific.vim
 
+" Colours
 colorscheme molokai
+hi FloatermBorder guisp=black

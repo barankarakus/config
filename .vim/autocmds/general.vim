@@ -6,7 +6,7 @@ function! TrimWhitespace()
     call winrestview(l:save)
 endfunction
 
-" Problem I'm trying to solve:
+" Problem I'm trying to solve (ONLY in vanilla vim):
 " I have a floaterm buffer (or buffers) (or just standard terminal-type
 " buffers), but they're hidden. I want to quit vim. I have only one file open.
 " I quit that file via :q or :q!, and I want that to be it: I should now have
@@ -22,6 +22,10 @@ endfunction
 " (meaning: it's the only remaining window in the only remaining tab), then,
 " *before* trying to implement the quit action, first get rid of any terminal
 " buffers.
+"
+" The reason this isn't a problem in neovim is that terminal-type buffers have
+" the b:modified variable set to 0 (false) by default, meaning neovim doesn't
+" consider them to be modified at any point.
 function! s:QuitFloatermsIfLastWindow()
     if tabpagenr('$') == 1 && winnr('$') == 1
         let l:bufnames = []
@@ -44,5 +48,7 @@ endfunction
 augroup general
     autocmd!
     autocmd BufWritePre * :call TrimWhitespace()
-    autocmd QuitPre * :call s:QuitFloatermsIfLastWindow()
+    if !has('nvim')
+        autocmd QuitPre * :call s:QuitFloatermsIfLastWindow()
+    endif
 augroup END
