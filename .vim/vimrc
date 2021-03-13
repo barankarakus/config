@@ -7,7 +7,6 @@ source $HOME/.vim/plugin-settings/settings.vim
 
 source $HOME/.vim/keys/windows.vim
 source $HOME/.vim/keys/buffers.vim
-" source $HOME/.vim/keys/tabs.vim
 source $HOME/.vim/keys/coc.vim
 source $HOME/.vim/keys/floaterm.vim
 
