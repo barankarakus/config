@@ -1,12 +1,9 @@
-" Better window navigation
-" tmux-navigator plug-in defines <C-H>, <C-J> etc to move across tmux/vim
-" panes/windows frictionlessly
-" However, the plug-in doesn't create mappings for vim's terminal buffers, so I
-" do that manually here
-tnoremap <silent> <C-H> <C-W>:TmuxNavigateLeft<CR>
-tnoremap <silent> <C-J> <C-W>:TmuxNavigateDown<CR>
-tnoremap <silent> <C-K> <C-W>:TmuxNavigateUp<CR>
-tnoremap <silent> <C-L> <C-W>:TmuxNavigateRight<CR>
+" Better window navigation with tmux-navigator (can move not only across vim
+" windows but also tmux panes)
+nnoremap <silent> <C-H> :TmuxNavigateLeft<CR>
+nnoremap <silent> <C-J> :TmuxNavigateDown<CR>
+nnoremap <silent> <C-K> :TmuxNavigateUp<CR>
+nnoremap <silent> <C-L> :TmuxNavigateRight<CR>
 
 " Better window resizing
 " Mapping <Alt-=> to horizontal size increase
