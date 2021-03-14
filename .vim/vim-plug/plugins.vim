@@ -1,4 +1,5 @@
-call plug#begin('~/.vim/plugged')           " Plugins are downloaded into this directory
+" Plugins are downloaded into this directory
+call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -22,6 +23,7 @@ Plug 'tomasr/molokai'
 " Ones for the future
 " Plug 'tpope/vim-fugitive'
 " Plug 'tpope/vim-surround'
+
 " Easily (un)comment lines across various filetypes
 Plug 'tpope/vim-commentary'
 Plug 'neoclide/coc.nvim'

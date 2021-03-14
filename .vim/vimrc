@@ -2,6 +2,7 @@ source $HOME/.vim/general/settings.vim
 source $HOME/.vim/general/commands.vim
 source $HOME/.vim/general/keys.vim
 
+source $HOME/.vim/plugin-settings/pre-settings.vim
 source $HOME/.vim/vim-plug/plugins.vim
 source $HOME/.vim/plugin-settings/settings.vim
 
