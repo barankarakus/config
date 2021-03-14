@@ -29,6 +29,11 @@ Plug 'tpope/vim-commentary'
 Plug 'neoclide/coc.nvim'
 Plug 'voldikss/vim-floaterm'
 
+" Snippet 'engine'
+Plug 'SirVer/ultisnips'
+" Snippet definitions
+Plug 'honza/vim-snippets'
+
 " Shows a live preview of a markdown document in the browser as it's being
 " edited from vim
 " Needs node and yarn to be installed; only load if both of these can be found
