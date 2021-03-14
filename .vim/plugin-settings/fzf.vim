@@ -1,47 +1,7 @@
 let g:fzf_preview_window = ['up:50%', 'ctrl-/']
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 
-" Make `:Rg` better! Adapted from fzf.vim's README.
-function! RipgrepFzf(query, fullscreen, directory)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  if !empty(a:directory)
-     let spec['dir'] = a:directory
-  endif
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
-
-command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0, '')
-
-" Use vim-rooter's `FindRootDirectory()` to create versions of `:Files` and
-" `:Rg` that are launched from the project root
-command! -nargs=* -bang ProjectRg call RipgrepFzf(<q-args>, <bang>0, FindRootDirectory())
-command! -nargs=0 -bang ProjectFiles
-    \ call fzf#vim#files(
-    \   FindRootDirectory(),
-    \   fzf#vim#with_preview(),
-    \   <bang>0
-    \ )
-
-" My stuff.
-function! s:ProjectFiles(...)
-    let l:command = 'ag ' . join(a:000, ' ') . ' -g '
-    let l:rootDir = FindRootDirectory()
-    let l:spec = {
-        \ 'source': l:command . "''",
-        \ 'options': [
-        \   '--prompt', l:rootDir . '/',
-        \   '--preview', '$ZDOTDIR/fzf/preview.sh {}',
-        \   '--preview-window', 'up:50%:hidden',
-        \   '--bind', 'ctrl-/:toggle-preview'
-        \ ],
-        \ 'dir': l:rootDir
-        \ }
-    call fzf#run(fzf#wrap(l:spec))
-endfunction
-
+" TODO: Reduce duplication
 function! s:Files(...)
     let l:command = 'ag ' . join(a:000, ' ') . ' -g '
     let l:dir = getcwd()
