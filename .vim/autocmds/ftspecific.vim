@@ -1,11 +1,12 @@
 augroup vim_ft
     autocmd!
-    set colorcolumn=80
+    autocmd FileType vim setlocal colorcolumn=80
 augroup END
 
 augroup cpp_ft
     autocmd!
-    set colorcolumn=80
+    autocmd FileType cpp set colorcolumn=80
+    autocmd FileType c set colorcolumn=80
     " The default commentstring is "/* %s */", where %s is the content of some
     " line
     " I'm changing this to "// %s"
