@@ -31,8 +31,9 @@ Plug 'voldikss/vim-floaterm'
 
 " Snippet 'engine'
 Plug 'SirVer/ultisnips'
-" Snippet definitions
-Plug 'honza/vim-snippets'
+
+" Pairs
+Plug 'jiangmiao/auto-pairs'
 
 " Shows a live preview of a markdown document in the browser as it's being
 " edited from vim

@@ -38,3 +38,6 @@ vnoremap <leader>j J
 " E for 'Exit'. <C-Q> might be more intuitive, but this is intercepted by
 " Unix terminals, so I'm not using it
 nnoremap <C-E> :Quit<CR>
+
+" Switch off highlighted search results; copied from vim-sensible plug-in
+nnoremap <silent> <leader>l :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
