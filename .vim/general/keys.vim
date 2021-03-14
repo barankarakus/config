@@ -35,4 +35,6 @@ vnoremap K <C-U>
 nnoremap <leader>j J
 vnoremap <leader>j J
 
-nnoremap <C-Q> :Quit<CR>
+" E for 'Exit'. <C-Q> might be more intuitive, but this is intercepted by
+" Unix terminals, so I'm not using it
+nnoremap <C-E> :Quit<CR>
