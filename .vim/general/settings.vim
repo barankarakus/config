@@ -52,6 +52,9 @@ set autoindent      " Automatic indenting: If the current line begins with
                     " same whitespace is applied to the new line
 
 "----- Indents, Shifts and Tabs -----"
+
+" Controls the number of spaces to display in place of a <Tab> character
+set tabstop=4
 " With this set, any operation which would by default enter a <Tab> character
 " into the text instead enters the number of space characters that a <Tab>
 " character would be displayed as (this is set by the `tabstop` option; the
@@ -85,6 +88,7 @@ set shiftround
 " good way to ensure consistent behaviour across <Tab>'ing in insert mode and
 " shifting in normal mode
 set softtabstop=-1
+
 
 "----- Miscellaneous -----"
 

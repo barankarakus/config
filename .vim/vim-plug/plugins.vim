@@ -10,7 +10,10 @@ Plug 'barankarakus/vim-rooter'
 
 Plug 'preservim/nerdtree'
 
+Plug 'mengelbrecht/lightline-bufferline'
 Plug 'itchyny/lightline.vim'
+
+Plug 'junegunn/goyo.vim'
 
 Plug 'christoomey/vim-tmux-navigator'
 
@@ -29,9 +32,6 @@ Plug 'tpope/vim-commentary'
 Plug 'neoclide/coc.nvim'
 Plug 'voldikss/vim-floaterm'
 
-" Snippet 'engine'
-Plug 'SirVer/ultisnips'
-
 " Pairs
 Plug 'jiangmiao/auto-pairs'
 
@@ -47,12 +47,11 @@ else
     let g:mkdp_loaded = 0
 endif
 
-Plug 'mengelbrecht/lightline-bufferline'
 
-" This function (defined in plug.vim) modifies Vim's runtimepath (see :h
-" runtimepath) to include the directories where the plug-ins, listed above, are
-" installed; for example, if we have Plug 'A/B' above, then the path
+" This function (defined in autoload/plug.vim) modifies Vim's runtimepath (see
+" :h) runtimepath) to include the directories where the plug-ins, listed above,
+" are installed; for example, if we have Plug 'A/B' above, then the path
 " <plug-in-directory>/A/B is added, where <plug-in-directory> is the directory
-" set within the plug#begin() function. However, it leaves the packpath variable
-" (see :h packpath) alone.
+" set within the plug#begin() function.
+" However, it leaves the packpath variable (see :h packpath) alone.
 call plug#end()
