@@ -1,2 +1,4 @@
 # local zshrc configuration
 localzshrc.sh
+
+zplug/

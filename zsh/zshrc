@@ -46,7 +46,7 @@ fi
 # zplug stuff (plug-in manager for zsh)
 # ---------------------------------------------------------------------------
 # Make sure that zplug is installed at this location
-ZPLUG_HOME="$HOME/.zplug"
+ZPLUG_HOME="$CONFIGDIR/zsh/zplug"
 
 # Run zplug initialisation script; brings 'zplug' function into namespace
 # which does all of the plug-in management
