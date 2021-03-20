@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
 
-# Set CONFIGDIR
+# Set CONFIGDIR to directory of this script
 
-if [[ $# -eq 0 ]]; then
-    export CONFIGDIR=~/config
-else
-    export CONFIGDIR=$1
-fi
-
+export CONFIGDIR=$(realpath $(dirname $0))
 echo "CONFIGDIR=$CONFIGDIR"
 
 # Create zshrc
