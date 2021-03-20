@@ -56,3 +56,36 @@ fi
 /usr/bin/env ln -s $CONFIGDIR/tmux/tmux.conf ~/.tmux.conf
 
 echo "Created symlink ~/.tmux.conf -> $CONFIGDIR/tmux/tmux.conf"
+
+# Download zplug if not already downloaded
+
+ZPLUG_HOME=$CONFIGDIR/zsh/zplug
+if [[ ! -d $ZPLUG_HOME ]]; then
+    echo "Downloading zplug to $ZPLUG_HOME"
+    git clone https://github.com/zplug/zplug $CONFIGDIR/zsh/zplug
+    echo "Downloaded zplug"
+fi
+
+# Install zsh plugins
+
+echo "Installing zsh plugins"
+source $CONFIGDIR/zsh/zshplugins.sh
+zplug install
+
+# Download vim-plug if not already downloaded
+
+VIMPLUG_FILE=$CONFIGDIR/vim/autoload/plug.vim
+if [[ ! -f $VIMPLUG_FILE ]]; then
+    echo "Downloading vimplug to $VIMPLUG_FILE"
+    curl -fLo $VIMPLUG_FILE --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    echo "Downloaded vimplug"
+fi
+
+# Run :PlugInstall within vim
+
+echo "Installing vim plugins"
+/usr/bin/env vim +PlugInstall +qa!
+
+# Finally, load zshrc
+source ~/.zshrc

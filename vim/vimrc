@@ -15,5 +15,5 @@ source $CONFIGDIR/vim/autocmds/general.vim
 source $CONFIGDIR/vim/autocmds/ftspecific.vim
 
 " Colours
-colorscheme molokai
+silent! colorscheme molokai
 hi FloatermBorder guisp=black
