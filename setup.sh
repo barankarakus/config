@@ -3,9 +3,9 @@
 # Set CONFIGDIR
 
 if [[ $# -eq 0 ]]; then
-    CONFIGDIR=~/config
+    export CONFIGDIR=~/config
 else
-    CONFIGDIR=$1
+    export CONFIGDIR=$1
 fi
 
 echo "CONFIGDIR=$CONFIGDIR"
