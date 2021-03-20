@@ -156,9 +156,9 @@ export EDITOR="nvim"
 # ---------------------------------------------------------------------------
 alias v="$EDITOR"
 
-alias evrc="$EDITOR ~/.vim/vimrc"  # edit vimrc
+alias evrc="$EDITOR $CONFIGDIR/vim/vimrc"  # edit vimrc
 
-alias ezrc="$EDITOR $CONFIGDIR/zsh/.zshrc"  # edit zshrc
+alias ezrc="$EDITOR $CONFIGDIR/zsh/zshrc"  # edit zshrc
 alias elzrc="$EDITOR $CONFIGDIR/zsh/localzshrc.sh"  # edit local zshrc
 alias szrc="source $CONFIGDIR/zsh/.zshrc"  # source zshrc
 
