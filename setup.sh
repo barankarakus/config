@@ -39,6 +39,10 @@ if [[ -f ~/.config/nvim/init.vim ]]; then
     echo "Deleted existing ~/.config/nvim/init.vim"
 fi
 
+if [[ ! -d ~/.config/nvim ]]; then
+    mkdir -p ~/.config/nvim
+fi
+
 echo 'let &rtp = $CONFIGDIR . "/vim" . "," . &rtp . "," . $CONFIGDIR . "/vim/after"' >> ~/.config/nvim/init.vim
 echo 'source $CONFIGDIR/vim/vimrc' >> ~/.config/nvim/init.vim
 
