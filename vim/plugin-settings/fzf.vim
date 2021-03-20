@@ -9,7 +9,7 @@ function! s:Files(...)
         \ 'source': l:command . "''",
         \ 'options': [
         \   '--prompt', l:dir . '/',
-        \   '--preview', '$ZDOTDIR/fzf/preview.sh {}',
+        \   '--preview', '$CONFIGDIR/zsh/fzf/preview.sh {}',
         \   '--preview-window', 'up:50%:hidden',
         \   '--bind', 'ctrl-/:toggle-preview'
         \ ],
@@ -25,7 +25,7 @@ function! s:ProjectFiles(...)
         \ 'source': l:command . "''",
         \ 'options': [
         \   '--prompt', l:dir . '/',
-        \   '--preview', '$ZDOTDIR/fzf/preview.sh {}',
+        \   '--preview', '$CONFIGDIR/zsh/fzf/preview.sh {}',
         \   '--preview-window', 'up:50%:hidden',
         \   '--bind', 'ctrl-/:toggle-preview'
         \ ],
@@ -42,7 +42,7 @@ function! s:Rg(...)
         \ 'options': [
         \   '--prompt', 'Rg> ', '--bind', 'change:reload:' . l:command . ' {q} || true',
         \   '--phony',
-        \   '--preview', '$ZDOTDIR/fzf/preview.sh {}',
+        \   '--preview', '$CONFIGDIR/zsh/fzf/preview.sh {}',
         \   '--preview-window', 'up:50%:hidden',
         \   '--bind', 'ctrl-/:toggle-preview'
         \ ],
@@ -59,7 +59,7 @@ function! s:ProjectRg(...)
         \ 'options': [
         \   '--prompt', 'Rg> ', '--bind', 'change:reload:' . l:command . ' {q} || true',
         \   '--phony',
-        \   '--preview', '$ZDOTDIR/fzf/preview.sh {}',
+        \   '--preview', '$CONFIGDIR/zsh/fzf/preview.sh {}',
         \   '--preview-window', 'up:50%:hidden',
         \   '--bind', 'ctrl-/:toggle-preview'
         \ ],

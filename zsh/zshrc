@@ -1,10 +1,10 @@
 # Load utility functions/items for use when configuring zsh; these start with U_
 # ---------------------------------------------------------------------------
-source $ZDOTDIR/utils/utils.sh
+source $CONFIGDIR/zsh/utils/utils.sh
 
 # Path to ripgrep config file
 # ---------------------------------------------------------------------------
-export RIPGREP_CONFIG_PATH=~/.ripgreprc
+export RIPGREP_CONFIG_PATH=$CONFIGDIR/rg/ripgreprc
 
 # Using `uname` to distinguish between MacOS and Linux systems and load appropriate
 # OS-specific configuration files
@@ -16,9 +16,9 @@ if ! U_command_exists uname; then
 else
     system=$(uname -s)
     if [ $system = "Darwin" ]; then
-        U_source_if_exists $ZDOTDIR/os_specific/maczshrc.sh
+        U_source_if_exists $CONFIGDIR/zsh/os_specific/maczshrc.sh
     elif [ $system = "Linux" ]; then
-        U_source_if_exists $ZDOTDIR/os_specific/linuxzshrc.sh
+        U_source_if_exists $CONFIGDIR/zsh/os_specific/linuxzshrc.sh
     else
         printf $failure_msg
     fi
@@ -62,7 +62,7 @@ source "$ZPLUG_HOME/init.zsh"
 # To reconfigure from scratch, run 'p10k configure' at the command line
 # to launch the configuration wizard; the p10k function is brought into the
 # namespace when the plugin is loaded (via zplug load, below)
-# Configuration settings are stored in $ZDOTDIR/.p10k.zsh
+# Configuration settings are stored in $CONFIGDIR/zsh/.p10k.zsh
 # Strategy for configuring command-prompt:
 # 1) Run configuration wizard to make it look like something you'd like
 # (the individual icons etc will be customised at Step 2)
@@ -82,16 +82,16 @@ zplug load
 # Load the powerlevel10k configuration file specifying how the prompt
 # should look: more details above.
 # ---------------------------------------------------------------------------
-U_source_if_exists $ZDOTDIR/.p10k.zsh
+U_source_if_exists $CONFIGDIR/zsh/.p10k.zsh
 
 # Source zsh keybindings configuration file
 # ---------------------------------------------------------------------------
-source $ZDOTDIR/keys/keys.sh
+source $CONFIGDIR/zsh/keys/keys.sh
 
 # Load fzf (command-line fuzzy-finder)
 # ---------------------------------------------------------------------------
 U_source_if_exists ~/.fzf.zsh
-U_source_if_exists $ZDOTDIR/fzf/fzf_config.sh
+U_source_if_exists $CONFIGDIR/zsh/fzf/fzf_config.sh
 
 # Setting up zsh to invoke Vim's built-in manpager for viewing man pages
 # Two benefits:
@@ -129,7 +129,7 @@ DIRSTACKSIZE=10
 ## this caches the directory stack so it persists over multiple sessions
 ## the chpwd function is a post-cd HOOK: it's called immediately after every
 ## time we cd; it's how we keep this directory stack cache file updated
-#DIRSTACKFILE=$ZDOTDIR/.zdirs
+#DIRSTACKFILE=$CONFIGDIR/zsh/.zdirs
 #if [[ -f $DIRSTACKFILE ]] # && [[ $#dirstack -eq 0 ]];
 #then
   #echo $dirstack
@@ -158,9 +158,9 @@ alias v="$EDITOR"
 
 alias evrc="$EDITOR ~/.vim/vimrc"  # edit vimrc
 
-alias ezrc="$EDITOR $ZDOTDIR/.zshrc"  # edit zshrc
-alias elzrc="$EDITOR $ZDOTDIR/localzshrc.sh"  # edit local zshrc
-alias szrc="source $ZDOTDIR/.zshrc"  # source zshrc
+alias ezrc="$EDITOR $CONFIGDIR/zsh/.zshrc"  # edit zshrc
+alias elzrc="$EDITOR $CONFIGDIR/zsh/localzshrc.sh"  # edit local zshrc
+alias szrc="source $CONFIGDIR/zsh/.zshrc"  # source zshrc
 
 alias g="git"
 alias gs="git status"
@@ -172,8 +172,8 @@ alias la="ls -a"  # list all
 
 # Source local zshrc file
 # ---------------------------------------------------------------------------
-U_source_if_exists $ZDOTDIR/localzshrc.sh
+U_source_if_exists $CONFIGDIR/zsh/localzshrc.sh
 
 # Unset util items
 # ---------------------------------------------------------------------------
-source $ZDOTDIR/utils/unset_utils.sh
+source $CONFIGDIR/zsh/utils/unset_utils.sh

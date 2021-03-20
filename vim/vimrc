@@ -1,0 +1,19 @@
+source $CONFIGDIR/vim/general/settings.vim
+source $CONFIGDIR/vim/general/commands.vim
+source $CONFIGDIR/vim/general/keys.vim
+
+source $CONFIGDIR/vim/plugin-settings/pre-settings.vim
+source $CONFIGDIR/vim/vim-plug/plugins.vim
+source $CONFIGDIR/vim/plugin-settings/settings.vim
+
+source $CONFIGDIR/vim/keys/windows.vim
+source $CONFIGDIR/vim/keys/buffers.vim
+source $CONFIGDIR/vim/keys/coc.vim
+source $CONFIGDIR/vim/keys/floaterm.vim
+
+source $CONFIGDIR/vim/autocmds/general.vim
+source $CONFIGDIR/vim/autocmds/ftspecific.vim
+
+" Colours
+colorscheme molokai
+hi FloatermBorder guisp=black

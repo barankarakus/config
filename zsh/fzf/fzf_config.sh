@@ -11,7 +11,7 @@ Rg () {
     |&  fzf --prompt='Rg> ' \
             --bind "change:reload:rg $TEMP --line-number {q} || true" \
             --phony \
-            --preview="$ZDOTDIR/fzf/preview.sh {}" \
+            --preview="$CONFIGDIR/zsh/fzf/preview.sh {}" \
             --preview-window='up:50%:hidden' --bind 'ctrl-/:toggle-preview'
     unset TEMP
 }
@@ -19,7 +19,7 @@ Rg () {
 Files () {
     ag  $@  -g '' \
     |&  fzf --prompt=$PWD/ \
-            --preview="$ZDOTDIR/fzf/preview.sh {}" \
+            --preview="$CONFIGDIR/zsh/fzf/preview.sh {}" \
             --preview-window='up:50%:hidden' \
             --bind 'ctrl-/:toggle-preview'
 }

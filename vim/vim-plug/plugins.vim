@@ -1,5 +1,5 @@
 " Plugins are downloaded into this directory
-call plug#begin('~/.vim/plugged')
+call plug#begin($CONFIGDIR . '/vim/plugged')
 
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
