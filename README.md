@@ -1,5 +1,3 @@
-Stuff that I symlink to my home directory.
+Config files + some other stuff.
 
-Specifically, any item whose name begins with a dot.
-
-Run the setup.sh script (from within this directory) to do all the symlinking.
+I copy this repo to some location on my system - not necessarily $HOME, since it might not be the case that $HOME is the quickest-to-access location - then run `source setup.sh` to set everything up.
