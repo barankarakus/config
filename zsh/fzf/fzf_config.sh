@@ -1,4 +1,8 @@
-export FZF_DEFAULT_OPTS="--height 70% --reverse --border --ansi"
+FZF_DEFAULT_OPTS="--bind ctrl-h:beginning-of-line --bind ctrl-l:end-of-line"
+FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --bind ctrl-c:cancel"
+FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --height 70% --reverse --border --ansi"
+export FZF_DEFAULT_OPTS
+
 export FZF_DEFAULT_COMMAND="ag -g ''"
 
 Rg () {
