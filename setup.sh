@@ -61,6 +61,20 @@ fi
 echo "Created symlink ~/.tmux.conf -> $CONFIGDIR/tmux/tmux.conf"
 echo
 
+# Download fzf if not already downloaded
+
+if [[ -f $CONFIGDIR/fzf/bin/fzf ]]; then
+    echo "fzf installation already exists at $CONFIGDIR/fzf"
+else
+    rm -rf $CONFIGDIR/fzf 2> /dev/null
+    echo "Downloading fzf to $CONFIGDIR/fzf"
+    git clone --depth 1 https://github.com/junegunn/fzf.git $CONFIGDIR/fzf
+    echo
+    echo "Installing fzf binary"
+    $CONFIGDIR/fzf/install --bin
+fi
+echo
+
 # Download zplug if not already downloaded
 
 ZPLUG_HOME=$CONFIGDIR/zsh/zplug

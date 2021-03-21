@@ -52,7 +52,7 @@ source $CONFIGDIR/zsh/zshplugins.sh
 # Load the powerlevel10k configuration file specifying how the prompt
 # should look: more details above.
 # ---------------------------------------------------------------------------
-U_source_if_exists $CONFIGDIR/zsh/.p10k.zsh
+source $CONFIGDIR/zsh/.p10k.zsh
 
 # Source zsh keybindings configuration file
 # ---------------------------------------------------------------------------
@@ -60,8 +60,8 @@ source $CONFIGDIR/zsh/keys/keys.sh
 
 # Load fzf (command-line fuzzy-finder)
 # ---------------------------------------------------------------------------
-U_source_if_exists ~/.fzf.zsh
-U_source_if_exists $CONFIGDIR/zsh/fzf/fzf_config.sh
+source $CONFIGDIR/zsh/fzf/fzf_load.zsh
+source $CONFIGDIR/zsh/fzf/fzf_config.sh
 
 # Setting up zsh to invoke Vim's built-in manpager for viewing man pages
 # Two benefits:
