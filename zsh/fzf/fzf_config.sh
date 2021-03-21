@@ -4,15 +4,16 @@ export FZF_DEFAULT_COMMAND="ag -g ''"
 Rg () {
     # Need this TEMP variable because of shell quoting bullshit
     TEMP=$@
-    # Making sure to always pass in --line-number flag, irrespective of default
-    # arguments set up in .ripgreprc, because this is needed for the preview
-    # window
-    rg  $@  --line-number '' \
+    rg  --no-config --smart-case --column $@ --no-heading --color=always \
+        --line-number '' \
     |&  fzf --prompt='Rg> ' \
             --bind "change:reload:rg $TEMP --line-number {q} || true" \
             --phony \
             --preview="$CONFIGDIR/zsh/fzf/preview.sh {}" \
-            --preview-window='up:50%:hidden' --bind 'ctrl-/:toggle-preview'
+            --preview-window='up:50%:hidden' \
+            --bind 'ctrl-/:toggle-preview' \
+            --delimiter : \
+            --bind 'ctrl-v:execute($EDITOR {1})'
     unset TEMP
 }
 
@@ -21,5 +22,6 @@ Files () {
     |&  fzf --prompt=$PWD/ \
             --preview="$CONFIGDIR/zsh/fzf/preview.sh {}" \
             --preview-window='up:50%:hidden' \
-            --bind 'ctrl-/:toggle-preview'
+            --bind 'ctrl-/:toggle-preview' \
+            --bind 'ctrl-v:execute($EDITOR {})'
 }
