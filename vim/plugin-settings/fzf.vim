@@ -1,4 +1,4 @@
-let g:fzf_preview_window = ['up:50%', 'ctrl-/']
+let g:fzf_preview_window = ['up:50%:hidden', 'ctrl-/' ]
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 
 " TODO: Reduce duplication
@@ -7,15 +7,10 @@ function! s:Files(...)
     let l:dir = getcwd()
     let l:spec = {
         \ 'source': l:command . "''",
-        \ 'options': [
-        \   '--prompt', l:dir . '/',
-        \   '--preview', '$CONFIGDIR/zsh/fzf/preview.sh {}',
-        \   '--preview-window', 'up:50%:hidden',
-        \   '--bind', 'ctrl-/:toggle-preview'
-        \ ],
+        \ 'options': ['--prompt', l:dir . '/'],
         \ 'dir': l:dir
         \ }
-    call fzf#run(fzf#wrap(l:spec))
+    call fzf#run(fzf#vim#with_preview(fzf#wrap(l:spec)))
 endfunction
 
 function! s:ProjectFiles(...)
@@ -23,15 +18,10 @@ function! s:ProjectFiles(...)
     let l:dir = FindRootDirectory()
     let l:spec = {
         \ 'source': l:command . "''",
-        \ 'options': [
-        \   '--prompt', l:dir . '/',
-        \   '--preview', '$CONFIGDIR/zsh/fzf/preview.sh {}',
-        \   '--preview-window', 'up:50%:hidden',
-        \   '--bind', 'ctrl-/:toggle-preview'
-        \ ],
+        \ 'options': ['--prompt', l:dir . '/'],
         \ 'dir': l:dir
         \ }
-    call fzf#run(fzf#wrap(l:spec))
+    call fzf#run(fzf#vim#with_preview(fzf#wrap(l:spec)))
 endfunction
 
 function! s:Rg(...)
@@ -40,15 +30,11 @@ function! s:Rg(...)
     let l:spec = {
         \ 'source': l:command . "''",
         \ 'options': [
-        \   '--prompt', 'Rg> ', '--bind', 'change:reload:' . l:command . ' {q} || true',
-        \   '--phony',
-        \   '--preview', '$CONFIGDIR/zsh/fzf/preview.sh {}',
-        \   '--preview-window', 'up:50%:hidden',
-        \   '--bind', 'ctrl-/:toggle-preview'
+        \   '--bind', 'change:reload:' . l:command . ' {q} || true', '--phony'
         \ ],
         \ 'dir': l:dir
         \ }
-    call fzf#run(fzf#wrap(l:spec))
+    call fzf#vim#grep(l:command . "''", 1, fzf#vim#with_preview(l:spec), 0)
 endfunction
 
 function! s:ProjectRg(...)
@@ -57,16 +43,13 @@ function! s:ProjectRg(...)
     let l:spec = {
         \ 'source': l:command . "''",
         \ 'options': [
-        \   '--prompt', 'Rg> ', '--bind', 'change:reload:' . l:command . ' {q} || true',
-        \   '--phony',
-        \   '--preview', '$CONFIGDIR/zsh/fzf/preview.sh {}',
-        \   '--preview-window', 'up:50%:hidden',
-        \   '--bind', 'ctrl-/:toggle-preview'
+        \   '--bind', 'change:reload:' . l:command . ' {q} || true', '--phony'
         \ ],
         \ 'dir': l:dir
         \ }
-    call fzf#run(fzf#wrap(l:spec))
+    call fzf#vim#grep(l:command . "''", 1, fzf#vim#with_preview(l:spec), 0)
 endfunction
+
 
 command! -nargs=* -bang Files if <bang>0 | call s:ProjectFiles(<f-args>) | else | call s:Files(<f-args>) | endif
 command! -nargs=* -bang Rg if <bang>0 | call s:ProjectRg(<f-args>) | else | call s:Rg(<f-args>) | endif
