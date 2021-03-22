@@ -35,6 +35,8 @@ Plug 'voldikss/vim-floaterm'
 " Pairs
 Plug 'jiangmiao/auto-pairs'
 
+Plug 'airblade/vim-gitgutter'
+
 " Shows a live preview of a markdown document in the browser as it's being
 " edited from vim
 " Needs node and yarn to be installed; only load if both of these can be found

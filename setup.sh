@@ -9,14 +9,17 @@ echo
 # Create zshrc
 
 if [[ -f ~/.zshrc ]]; then
-    rm ~/.zshrc
-    echo "Deleted existing ~/.zshrc"
+    echo "Found existing ~/.zshrc"
+    echo 'Make sure the CONFIGDIR environment variable is defined and' \
+         'exported, and $CONFIGDIR/zsh/zshrc is sourced'
+    # rm ~/.zshrc
+    # echo "Deleted existing ~/.zshrc"
+else
+    echo "~/.zshrc does not exist"
+    echo "export CONFIGDIR=$CONFIGDIR" >> ~/.zshrc
+    echo 'source $CONFIGDIR/zsh/zshrc' >> ~/.zshrc
+    echo "Created default ~/.zshrc with CONFIGDIR=$CONFIGDIR"
 fi
-
-echo "export CONFIGDIR=$CONFIGDIR" >> ~/.zshrc
-echo 'source $CONFIGDIR/zsh/zshrc' >> ~/.zshrc
-
-echo "Created ~/.zshenv"
 echo
 
 # Create vanilla vimrc

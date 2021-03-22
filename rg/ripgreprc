@@ -8,8 +8,5 @@
 # Note that the RIPGREP_CONFIG_PATH enviroment variable must point to this file
 # for ripgrep to be aware of it.
 
---column
 --smart-case
 --line-number
---no-heading
---color=always
