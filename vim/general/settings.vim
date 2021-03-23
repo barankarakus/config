@@ -94,3 +94,5 @@ set softtabstop=-1
 
 set hidden          " For smoothly transitioning between buffers
 set updatetime=300
+set splitright
+set splitbelow

@@ -5,7 +5,7 @@ inoremap jk <Esc>
 let mapleader = ','
 let maplocalleader = '\'
 
-" making j, k move up one DISPLAY LINE, rather than true line
+" Making j, k move up one DISPLAY LINE, rather than true line
 nnoremap j gj
 nnoremap k gk
 
@@ -41,3 +41,7 @@ nnoremap <C-E> :Quit<CR>
 
 " Switch off highlighted search results; copied from vim-sensible plug-in
 nnoremap <silent> <leader>l :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+
+" Easier splitting
+nnoremap <C-\> :vsplit<CR>
+nnoremap <C-_> :split<CR>
