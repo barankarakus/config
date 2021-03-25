@@ -3,10 +3,10 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 
 " TODO: Reduce duplication
 function! s:Files(...)
-    let l:command = 'ag ' . join(a:000, ' ') . ' -g '
+    let l:command = 'rg --no-config ' . join(a:000, ' ') . ' --files'
     let l:dir = getcwd()
     let l:spec = {
-        \ 'source': l:command . "''",
+        \ 'source': l:command,
         \ 'options': ['--prompt', l:dir . '/'],
         \ 'dir': l:dir
         \ }
@@ -14,10 +14,10 @@ function! s:Files(...)
 endfunction
 
 function! s:ProjectFiles(...)
-    let l:command = 'ag ' . join(a:000, ' ') . ' -g '
+    let l:command = 'rg --no-config ' . join(a:000, ' ') . ' --files'
     let l:dir = FindRootDirectory()
     let l:spec = {
-        \ 'source': l:command . "''",
+        \ 'source': l:command,
         \ 'options': ['--prompt', l:dir . '/'],
         \ 'dir': l:dir
         \ }
@@ -25,7 +25,7 @@ function! s:ProjectFiles(...)
 endfunction
 
 function! s:Rg(...)
-    let l:command = 'rg ' . join(a:000, ' ') . ' --line-number '
+    let l:command = 'rg --no-config ' . join(a:000, ' ') . ' --no-heading --color=always --line-number '
     let l:dir = getcwd()
     let l:spec = {
         \ 'source': l:command . "''",
@@ -38,7 +38,7 @@ function! s:Rg(...)
 endfunction
 
 function! s:ProjectRg(...)
-    let l:command = 'rg ' . join(a:000, ' ') . ' --line-number '
+    let l:command = 'rg --no-config ' . join(a:000, ' ') . ' --no-heading --color=always --line-number '
     let l:dir = FindRootDirectory()
     let l:spec = {
         \ 'source': l:command . "''",

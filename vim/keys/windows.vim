@@ -1,5 +1,6 @@
 " Better window navigation with tmux-navigator (can move not only across vim
 " windows but also tmux panes)
+let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <C-H> :TmuxNavigateLeft<CR>
 nnoremap <silent> <C-J> :TmuxNavigateDown<CR>
 nnoremap <silent> <C-K> :TmuxNavigateUp<CR>

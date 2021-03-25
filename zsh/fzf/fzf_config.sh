@@ -3,7 +3,7 @@ FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --bind ctrl-c:cancel"
 FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --height 70% --reverse --border --ansi"
 export FZF_DEFAULT_OPTS
 
-export FZF_DEFAULT_COMMAND="ag -g ''"
+export FZF_DEFAULT_COMMAND="rg --files"
 
 Rg () {
     # Need this TEMP variable because of shell quoting bullshit
@@ -17,14 +17,14 @@ Rg () {
             --preview-window='up:50%:hidden' \
             --bind 'ctrl-/:toggle-preview' \
             --delimiter : \
-            --bind 'ctrl-v:execute($EDITOR {1})'
+            --bind 'ctrl-v:execute($EDITOR {1})' \
             --ansi
     # Do NOT 'unset FZF_RG_TEMP' here - it leads to not being able to quit out
     # of fzf properly
 }
 
 Files () {
-    ag  $@  -g '' \
+    rg  $@  --files \
     |&  fzf --prompt=$PWD/ \
             --preview="$CONFIGDIR/zsh/fzf/preview.sh {}" \
             --preview-window='up:50%:hidden' \
