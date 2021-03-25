@@ -17,7 +17,7 @@ Rg () {
             --preview-window='up:50%:hidden' \
             --bind 'ctrl-/:toggle-preview' \
             --delimiter : \
-            --bind 'ctrl-v:execute($EDITOR {1})'
+            --bind 'ctrl-v:execute($EDITOR {1})' \
             --ansi
     # Do NOT 'unset FZF_RG_TEMP' here - it leads to not being able to quit out
     # of fzf properly
