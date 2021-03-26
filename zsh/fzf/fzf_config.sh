@@ -11,7 +11,7 @@ Rg () {
     rg  --no-config --smart-case --column --color=always $FZF_RG_TEMP \
         --no-heading --line-number '' \
     |&  fzf --prompt='Rg> ' \
-            --bind "change:reload:rg $FZF_RG_TEMP --line-number {q} || true" \
+            --bind "change:reload:rg --no-config --smart-case --column --color=always $FZF_RG_TEMP --no-heading --line-number {q} || true" \
             --phony \
             --preview="$CONFIGDIR/zsh/fzf/preview.sh {}" \
             --preview-window='up:50%:hidden' \

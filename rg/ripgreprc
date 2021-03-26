@@ -9,4 +9,3 @@
 # for ripgrep to be aware of it.
 
 --smart-case
---line-number
