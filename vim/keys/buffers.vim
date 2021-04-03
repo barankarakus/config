@@ -1,9 +1,9 @@
 " Quicker switching between buffers
-nnoremap <C-P> :bprev<CR>
-nnoremap <C-N> :bnext<CR>
+nnoremap <silent> <C-P> :bprev<CR>
+nnoremap <silent> <C-N> :bnext<CR>
 
 " Switch to buffers by their 'ordinal number'
-command! -nargs=1 B :call lightline#bufferline#go(<args>)
+" command! -nargs=1 B :call lightline#bufferline#go(<args>)
 " Do it quicker
 nmap <Leader>1 <Plug>lightline#bufferline#go(1)
 nmap <Leader>2 <Plug>lightline#bufferline#go(2)

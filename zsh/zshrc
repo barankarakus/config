@@ -105,6 +105,7 @@ export EDITOR="nvim"
 # Some aliases
 # ---------------------------------------------------------------------------
 alias v="$EDITOR"
+alias vim="echo 'stop typing vim you idiot'"  # temporary
 
 alias evrc="$EDITOR $CONFIGDIR/vim/vimrc"  # edit vimrc
 
