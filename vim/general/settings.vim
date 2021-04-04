@@ -94,5 +94,9 @@ set softtabstop=-1
 
 set hidden          " For smoothly transitioning between buffers
 set updatetime=300
-set splitright
-set splitbelow
+set splitright      " Vertical splits create new window on the right
+set splitbelow      " Horizontal splits create new window at bottom
+" Enable mouse to be used
+" This is great for resizing windows and scrolling, but other uses are that
+" it allows for highlighting text to be copied with the mouse
+set mouse=a

@@ -62,6 +62,7 @@ fi
 /usr/bin/env ln -s $CONFIGDIR/tmux/tmux.conf ~/.tmux.conf
 
 echo "Created symlink ~/.tmux.conf -> $CONFIGDIR/tmux/tmux.conf"
+echo "You still need to manually fire up tmux and type <Ctrl-A>-I to download plug-ins"
 echo
 
 # Download fzf if not already downloaded
